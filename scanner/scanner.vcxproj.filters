@@ -13,6 +13,30 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Файлы исходного кода\xml_constructors">
+      <UniqueIdentifier>{94d4f17a-b40c-4804-802b-b67e2e949272}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Заголовочные файлы\xml_constructors">
+      <UniqueIdentifier>{8621bc80-055c-420c-bbdc-efa1cfdf6897}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Заголовочные файлы\fsm">
+      <UniqueIdentifier>{fe598864-75bd-445b-92bf-8840c79b8543}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Заголовочные файлы\out">
+      <UniqueIdentifier>{31d7a6c6-e9eb-4073-8619-1bc459d2e8bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Заголовочные файлы\inner">
+      <UniqueIdentifier>{091db199-6c22-4c5e-8ac6-31127c270fae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\fsm">
+      <UniqueIdentifier>{6223b5a7-3391-4305-94f8-e72951f09ae6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\inner">
+      <UniqueIdentifier>{ad923b9f-f817-47f8-974d-6682b3856a42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\out">
+      <UniqueIdentifier>{c6cf2569-d6d0-4fd6-883d-5bc86ddfb1c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -24,26 +48,32 @@
     <ClInclude Include="targetver.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="scanner_common.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="scanner_facade.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="scanner_context.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="scanner_exception.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="char_stream_fsm.h">
-      <Filter>Заголовочные файлы</Filter>
+    <ClInclude Include="fsm_constructor.h">
+      <Filter>Заголовочные файлы\xml_constructors</Filter>
     </ClInclude>
     <ClInclude Include="char_class.h">
-      <Filter>Заголовочные файлы</Filter>
+      <Filter>Заголовочные файлы\fsm</Filter>
     </ClInclude>
-    <ClInclude Include="fsm_constructor.h">
-      <Filter>Заголовочные файлы</Filter>
+    <ClInclude Include="stream_fsm.h">
+      <Filter>Заголовочные файлы\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="char_state.h">
+      <Filter>Заголовочные файлы\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="transition.h">
+      <Filter>Заголовочные файлы\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="scanner_facade.h">
+      <Filter>Заголовочные файлы\out</Filter>
+    </ClInclude>
+    <ClInclude Include="scanner_exception.h">
+      <Filter>Заголовочные файлы\out</Filter>
+    </ClInclude>
+    <ClInclude Include="scanner_context.h">
+      <Filter>Заголовочные файлы\inner</Filter>
+    </ClInclude>
+    <ClInclude Include="scanner_common.h">
+      <Filter>Заголовочные файлы\inner</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -53,23 +83,29 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="scanner_facade.cpp">
-      <Filter>Файлы исходного кода</Filter>
+    <ClCompile Include="fsm_constructor.cpp">
+      <Filter>Файлы исходного кода\xml_constructors</Filter>
     </ClCompile>
-    <ClCompile Include="scanner_context.cpp">
-      <Filter>Файлы исходного кода</Filter>
+    <ClCompile Include="transition.cpp">
+      <Filter>Файлы исходного кода\fsm</Filter>
     </ClCompile>
-    <ClCompile Include="scanner_exception.cpp">
-      <Filter>Файлы исходного кода</Filter>
-    </ClCompile>
-    <ClCompile Include="char_stream_fsm.cpp">
-      <Filter>Файлы исходного кода</Filter>
+    <ClCompile Include="stream_fsm.cpp">
+      <Filter>Файлы исходного кода\fsm</Filter>
     </ClCompile>
     <ClCompile Include="char_class.cpp">
-      <Filter>Файлы исходного кода</Filter>
+      <Filter>Файлы исходного кода\fsm</Filter>
     </ClCompile>
-    <ClCompile Include="fsm_constructor.cpp">
-      <Filter>Файлы исходного кода</Filter>
+    <ClCompile Include="char_state.cpp">
+      <Filter>Файлы исходного кода\fsm</Filter>
+    </ClCompile>
+    <ClCompile Include="scanner_context.cpp">
+      <Filter>Файлы исходного кода\inner</Filter>
+    </ClCompile>
+    <ClCompile Include="scanner_exception.cpp">
+      <Filter>Файлы исходного кода\out</Filter>
+    </ClCompile>
+    <ClCompile Include="scanner_facade.cpp">
+      <Filter>Файлы исходного кода\out</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

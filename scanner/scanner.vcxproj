@@ -74,12 +74,16 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IntDir>$(Platform)\</IntDir>
+    <OutDir>$(SolutionDir)$(Platform)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IntDir>$(Platform)\</IntDir>
+    <OutDir>$(SolutionDir)$(Platform)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -146,7 +150,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="char_class.h" />
-    <ClInclude Include="char_stream_fsm.h" />
+    <ClInclude Include="char_state.h" />
+    <ClInclude Include="stream_fsm.h" />
     <ClInclude Include="fsm_constructor.h" />
     <ClInclude Include="scanner_common.h" />
     <ClInclude Include="scanner_context.h" />
@@ -154,10 +159,12 @@
     <ClInclude Include="scanner_facade.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="transition.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="char_class.cpp" />
-    <ClCompile Include="char_stream_fsm.cpp" />
+    <ClCompile Include="char_state.cpp" />
+    <ClCompile Include="stream_fsm.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -177,6 +184,7 @@
     <ClCompile Include="scanner_exception.cpp" />
     <ClCompile Include="scanner_facade.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="transition.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
