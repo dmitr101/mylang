@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "compile_launch", "mylang_all\mylang_all.vcxproj", "{7A4E0C2C-278E-4C6D-AA24-725C1B5727B7}"
 EndProject
@@ -12,6 +12,12 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "parser", "parser\parser.vcxproj", "{BF2E6A1F-B9B9-4515-84C8-4C1E5F58A70D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "core", "core\core.vcxproj", "{C43DFA8E-6B32-4558-B529-3A546E21EACD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "translator_internal_dll", "translator_internal_dll", "{B82A1123-3E68-48E8-A812-70C5A2810AD4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "translator_executables", "translator_executables", "{7B50D54E-932E-4D8D-9CA6-144F470BCA16}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "external", "external", "{4E6B231C-346A-45B0-9A5F-216174AFCDFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,5 +70,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7A4E0C2C-278E-4C6D-AA24-725C1B5727B7} = {7B50D54E-932E-4D8D-9CA6-144F470BCA16}
+		{F43A8693-8446-466B-9AF5-4755F36E32D7} = {7B50D54E-932E-4D8D-9CA6-144F470BCA16}
+		{0F5306D1-9DBC-4C3A-B6B8-6BCF90A48C65} = {B82A1123-3E68-48E8-A812-70C5A2810AD4}
+		{BF2E6A1F-B9B9-4515-84C8-4C1E5F58A70D} = {B82A1123-3E68-48E8-A812-70C5A2810AD4}
+		{C43DFA8E-6B32-4558-B529-3A546E21EACD} = {B82A1123-3E68-48E8-A812-70C5A2810AD4}
 	EndGlobalSection
 EndGlobal

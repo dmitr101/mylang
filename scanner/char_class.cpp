@@ -13,5 +13,6 @@ std::string const & char_class::get_name() const
 
 bool char_class::belongs(char c) const
 {
-    return std::regex_match(c, rexp_);
+    char str[2] = " "; str[0] = c;
+    return std::regex_match(str, rexp_);
 }
