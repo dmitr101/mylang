@@ -1,5 +1,4 @@
 #include "../scanner/scanner_facade.h"
-#include "../scanner/scanner_config.h"
 #include "../scanner/scanner_exception.h"
 #include "../parser/parser_facade.h"
 #include "../parser/parse_result.h"
@@ -16,9 +15,11 @@ void print_help()
 
 }
 
-inline scanner_config get_default_scanner_config()
+inline std::ifstream get_default_scanner_config()
 {
-	return{ "", "" };
+    std::ifstream config;
+    config.open("sconfig.xml");
+    return config;
 }
 
 void print_scanner_config_error()
@@ -38,7 +39,9 @@ void print_unknown_error()
 
 inline std::ifstream load_src(char const* path)
 {
-
+    std::ifstream config;
+    config.open(path);
+    return config;
 }
 
 void log_parse_result(parse_result const& result)

@@ -6,13 +6,12 @@
 #include <memory>
 #include <istream>
 
-class scanner_config;
-class SCANNER_API scanner_facade
+class scanner_facade
 {
 	DECLARE_SINGLETON(scanner_facade)
 public:
-	bool initialize(scanner_config&& config);
-	std::unique_ptr<out_lexeme_table> scan(std::istream& str);
+	SCANNER_API bool initialize(std::ifstream&& config);
+    SCANNER_API std::unique_ptr<out_lexeme_table> scan(std::istream& str);
 
 private:
 	std::vector<std::unique_ptr<scanner_context>> contexts_;

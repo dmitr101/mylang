@@ -149,7 +149,6 @@
     <ClInclude Include="char_stream_fsm.h" />
     <ClInclude Include="fsm_constructor.h" />
     <ClInclude Include="scanner_common.h" />
-    <ClInclude Include="scanner_config.h" />
     <ClInclude Include="scanner_context.h" />
     <ClInclude Include="scanner_exception.h" />
     <ClInclude Include="scanner_facade.h" />
@@ -174,7 +173,6 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="fsm_constructor.cpp" />
-    <ClCompile Include="scanner_config.cpp" />
     <ClCompile Include="scanner_context.cpp" />
     <ClCompile Include="scanner_exception.cpp" />
     <ClCompile Include="scanner_facade.cpp" />

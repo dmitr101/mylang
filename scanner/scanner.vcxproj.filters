@@ -30,9 +30,6 @@
     <ClInclude Include="scanner_facade.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="scanner_config.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
     <ClInclude Include="scanner_context.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
@@ -57,9 +54,6 @@
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
     <ClCompile Include="scanner_facade.cpp">
-      <Filter>Файлы исходного кода</Filter>
-    </ClCompile>
-    <ClCompile Include="scanner_config.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
     <ClCompile Include="scanner_context.cpp">
