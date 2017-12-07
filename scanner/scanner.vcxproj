@@ -162,6 +162,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="transition.h" />
+    <ClInclude Include="xml_helpers.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="char_class.cpp" />
@@ -187,6 +188,7 @@
     <ClCompile Include="scanner_facade.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="transition.cpp" />
+    <ClCompile Include="xml_helpers.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

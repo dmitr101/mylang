@@ -75,6 +75,9 @@
     <ClInclude Include="scanner_common.h">
       <Filter>Заголовочные файлы\inner</Filter>
     </ClInclude>
+    <ClInclude Include="xml_helpers.h">
+      <Filter>Заголовочные файлы\xml_constructors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -106,6 +109,9 @@
     </ClCompile>
     <ClCompile Include="scanner_facade.cpp">
       <Filter>Файлы исходного кода\out</Filter>
+    </ClCompile>
+    <ClCompile Include="xml_helpers.cpp">
+      <Filter>Файлы исходного кода\xml_constructors</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
