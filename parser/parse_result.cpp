@@ -5,8 +5,3 @@
 parse_result::parse_result()
 {
 }
-
-
-parse_result::~parse_result()
-{
-}

@@ -45,7 +45,7 @@
     <ClInclude Include="lexeme_type.h">
       <Filter>Заголовочные файлы\lexeme</Filter>
     </ClInclude>
-    <ClInclude Include="full_out_lexeme_table.h">
+    <ClInclude Include="out_lexeme_table.h">
       <Filter>Заголовочные файлы\lexeme</Filter>
     </ClInclude>
   </ItemGroup>
@@ -60,6 +60,9 @@
       <Filter>Файлы исходного кода\lexeme</Filter>
     </ClCompile>
     <ClCompile Include="lexeme_builder.cpp">
+      <Filter>Файлы исходного кода\lexeme</Filter>
+    </ClCompile>
+    <ClCompile Include="out_lexeme_table.cpp">
       <Filter>Файлы исходного кода\lexeme</Filter>
     </ClCompile>
   </ItemGroup>

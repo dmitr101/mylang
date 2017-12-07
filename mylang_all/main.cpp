@@ -73,9 +73,9 @@ int main(int argc, char** argv)
 		auto result = parser.parse(*lexems);
 		log_parse_result(*result);
 	}
-	catch (scanner_exception ex)
+	catch (scanner_exception* ex)
 	{
-		print_scanner_error(ex.what());
+		print_scanner_error(ex->what());
 		return -1;
 	}
 	catch (...)

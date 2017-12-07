@@ -13,14 +13,17 @@
 		classname& operator=(classname&& other) = delete;	  \
 		classname& operator=(classname const& other) = delete;
 
-#define CREATE_ACCESSOR(classname)    \
+#define CREATE_ACCESSOR(classname, DLL_API)    \
 	public:							   \
-		static classname& get_instance() {	   \
+		DLL_API static classname& get_instance() {	   \
 			static classname instance; \
 			return instance;		   \
 		}							   
 
 
-#define DECLARE_SINGLETON(classname) \
+#define DECLARE_SINGLETON_DLL(classname, DLL) \
 	FORBID_CONSTRUCTORS(classname)	 \
-	CREATE_ACCESSOR(classname)
+	CREATE_ACCESSOR(classname, DLL)
+
+#define DECLARE_SINGLETON_DEFAULT(classname, DLL) \
+	DECLARE_SINGLETON_DLL(classname, )

@@ -146,7 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core_common.h" />
-    <ClInclude Include="full_out_lexeme_table.h" />
+    <ClInclude Include="out_lexeme_table.h" />
     <ClInclude Include="lexeme.h" />
     <ClInclude Include="lexeme_builder.h" />
     <ClInclude Include="lexeme_type.h" />
@@ -171,6 +171,7 @@
     </ClCompile>
     <ClCompile Include="lexeme.cpp" />
     <ClCompile Include="lexeme_builder.cpp" />
+    <ClCompile Include="out_lexeme_table.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
