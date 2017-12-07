@@ -4,12 +4,13 @@
 #include "../parser/parse_result.h"
 #include <fstream>
 #include <iostream>
+#include <atlconv.h>
 #pragma optimize("", off)
 static char const* const SCANNER_DEFAULT_CONFIG_FILENAME = "sconfig.xml";
 
 void print_error(char const* txt)
 {
-    std::cout << txt << std::endl;
+    //std::cout << txt << std::endl;
 }
 
 void print_arg_count_error()
@@ -34,6 +35,14 @@ void log_parse_result(parse_result const& result)
 
 }
 
+void print_ole(scanner_init_exception* ex)
+{
+    USES_CONVERSION;
+    BSTR ole = ex->msg();
+    const char *pString = OLE2CA(ole);
+    std::cout << pString << std::endl;
+}
+
 void run_translator(char const* src_file)
 {
     try
@@ -49,8 +58,8 @@ void run_translator(char const* src_file)
     }
     catch (scanner_init_exception* ex)
     {
-        auto c = ex->what();
-        print_error(c);
+        print_ole(ex);
+        //print_error(c);
     }
     catch (scanner_scan_exception* ex)
     {

@@ -2,7 +2,7 @@
 #include "scanner_exception.h"
 
 using namespace tinyxml2;
-scanner_init_exception* create_doc_parse_ex(XMLDocument const& doc)
+scanner_init_exception* create_doc_parse_ex(tinyxml2::XMLDocument const& doc)
 {
     scanner_init_exception* ex = new scanner_init_exception();
     ex->push_err_line("Scanner config parse error!");
@@ -20,7 +20,7 @@ scanner_init_exception* create_el_find_ex(std::string const& name)
     return ex;
 }
 
-scanner_init_exception* create_attr_find_ex(XMLElement const& el, std::string const& attr_name)
+scanner_init_exception* create_attr_find_ex(tinyxml2::XMLElement const& el, std::string const& attr_name)
 {
     scanner_init_exception* ex = new scanner_init_exception();
     ex->push_err_line("Scanner config parse error!");
@@ -33,7 +33,7 @@ scanner_init_exception* create_attr_find_ex(XMLElement const& el, std::string co
     return ex;
 }
 
-scanner_init_exception* create_wrong_child_ex(XMLElement const& parent, XMLElement const& child, std::string const& expected)
+scanner_init_exception* create_wrong_child_ex(tinyxml2::XMLElement const& parent, tinyxml2::XMLElement const& child, std::string const& expected)
 {
     scanner_init_exception* ex = new scanner_init_exception();
     ex->push_err_line("Scanner config parse error!");
@@ -52,15 +52,15 @@ scanner_init_exception* create_wrong_child_ex(XMLElement const& parent, XMLEleme
 
 std::unique_ptr<tinyxml2::XMLDocument> xml_helpers::load_doc(std::string const& file_name)
 {
-    auto result = std::make_unique<XMLDocument>();
-    if (result->LoadFile(file_name.c_str()) != XML_SUCCESS)
+    auto result = std::make_unique<tinyxml2::XMLDocument>();
+    if (result->LoadFile(file_name.c_str()) != tinyxml2::XML_SUCCESS)
     {
         throw create_doc_parse_ex(*result);
     }
     return result;
 }
 
-XMLElement const& xml_helpers::get_first_child(XMLNode const& node, std::string const& name)
+tinyxml2::XMLElement const& xml_helpers::get_first_child(tinyxml2::XMLNode const& node, std::string const& name)
 {
     auto result = node.FirstChildElement(name.c_str());
     if (!result)
@@ -82,7 +82,7 @@ void xml_helpers::for_each_child_check_name(tinyxml2::XMLElement const& el, std:
     }
 }
 
-std::string xml_helpers::get_attr(XMLElement const& el, std::string const& name)
+std::string xml_helpers::get_attr(tinyxml2::XMLElement const& el, std::string const& name)
 {
     auto res = el.Attribute(name.c_str());
     if (!res)

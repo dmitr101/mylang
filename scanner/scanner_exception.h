@@ -2,6 +2,7 @@
 #include "scanner_common.h"
 #include "vcruntime_exception.h"
 #include <sstream>
+#include <wtypes.h>
 class scanner_scan_exception : public std::exception
 {
 public:
@@ -19,7 +20,7 @@ public:
     ~scanner_init_exception() = default;
     void push_err_line(char const* line);
 
-    SCANNER_API const char* what() const override;
+    SCANNER_API BSTR msg() const;
 
 private:
     std::stringstream data_;

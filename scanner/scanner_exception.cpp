@@ -1,4 +1,5 @@
 #include "scanner_exception.h"
+#include <atlconv.h>
 #pragma optimize("", off)
 
 scanner_scan_exception::scanner_scan_exception()
@@ -25,9 +26,11 @@ void scanner_init_exception::push_err_line(char const* line)
     data_ << line << "\n";
 }
 
-const char* scanner_init_exception::what() const
+BSTR scanner_init_exception::msg() const
 {
     auto s = data_.str();
     auto c = s.c_str();
-    return c;
+    USES_CONVERSION;
+    auto ole = A2COLE(c);
+    return ::SysAllocString(ole);
 }
