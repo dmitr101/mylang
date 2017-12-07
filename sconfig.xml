@@ -1,0 +1,28 @@
+<scanner>
+	<classes>
+		<!--General characters-->
+		<class name = "digit" rexp = "\d"/>
+		<class name = "letter" rexp = "[A-Z]|[a-z]"/>
+		<class name = "eq" rexp = "[=]"/>
+		<!--Arythmetic characters-->
+		<class name = "add" rexp = "[+]"/>
+		<class name = "sub" rexp = "[-]"/>
+		<class name = "mul" rexp = "[*]"/>
+		<class name = "div" rexp = "[/]"/>
+		<!--Comparison characters-->
+		<class name = "less" rexp = "<"/>
+		<class name = "greater" rexp = ">"/>
+		<!--Delim characters-->
+		<class name = "dot" rexp = "[.]"/>
+		<class name = "comma" rexp = "[,]"/>
+		<class name = "col" rexp = "[:]"/>
+		<class name = "scol" rexp = "[;]"/>
+		<class name = "obr" rexp = "[(]"/>
+		<class name = "cbr" rexp = "[)]"/>
+	</classes>
+	<states>
+		<state name = "default">
+			<transition class = "" state = "">
+		</state>
+	</states>
+</scanner>
