@@ -4,32 +4,22 @@
 #include "../parser/parse_result.h"
 #include <fstream>
 #include <iostream>
-
+#pragma optimize("", off)
 static char const* const SCANNER_DEFAULT_CONFIG_FILENAME = "sconfig.xml";
-
-void print_arg_count_error()
-{
-
-}
-
-void print_help()
-{
-
-}
-
-void print_scanner_config_error()
-{
-
-}
 
 void print_error(char const* txt)
 {
+    std::cout << txt << std::endl;
+}
 
+void print_arg_count_error()
+{
+    std::cout << "There must be exactly one arg - source file path!" << std::endl;
 }
 
 void print_unknown_error()
 {
-
+    std::cout << "Something went wrong, but I don't know what. Sorry." << std::endl;
 }
 
 inline std::ifstream load_src(char const* path)
@@ -48,18 +38,19 @@ void run_translator(char const* src_file)
 {
     try
     {
-        auto file = load_src(src_file);
+        //auto file = load_src(src_file);
         auto& scanner = scanner_facade::get_instance();
         scanner.initialize(SCANNER_DEFAULT_CONFIG_FILENAME);
-        auto lexems = scanner.scan(file);
+        /*auto lexems = scanner.scan(file);
 
         auto& parser = parser_facade::get_instance();
         auto result = parser.parse(*lexems);
-        log_parse_result(*result);
+        log_parse_result(*result);*/
     }
     catch (scanner_init_exception* ex)
     {
-        print_error(ex->what());
+        auto c = ex->what();
+        print_error(c);
     }
     catch (scanner_scan_exception* ex)
     {
@@ -73,10 +64,12 @@ void run_translator(char const* src_file)
 
 void main(int argc, char** argv)
 {
-	if (argc != 2)
+	/*if (argc != 2)
 	{
 		print_arg_count_error();
-		print_help();
-	}
+        system("pause");
+        return;
+	}*/
     run_translator(*(argv + 1));
+    system("pause");
 }

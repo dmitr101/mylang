@@ -23,7 +23,8 @@
 	</classes>
 	<states>
 		<state name = "default">
-			<transition class = "" state = "">
+			<transition class = "" state = ""/>
 		</state>
+		
 	</states>
 </scanner>

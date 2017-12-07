@@ -1,4 +1,5 @@
 #include "scanner_exception.h"
+#pragma optimize("", off)
 
 scanner_scan_exception::scanner_scan_exception()
 {
@@ -26,5 +27,7 @@ void scanner_init_exception::push_err_line(char const* line)
 
 const char* scanner_init_exception::what() const
 {
-    return data_.str().c_str();
+    auto s = data_.str();
+    auto c = s.c_str();
+    return c;
 }
