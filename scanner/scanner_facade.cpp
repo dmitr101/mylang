@@ -1,8 +1,9 @@
 #include "scanner_facade.h"
+#include "xml_contructors.h"
 
-
-bool scanner_facade::initialize(std::ifstream&& config)
+bool scanner_facade::initialize(std::string const& config_file_name)
 {
+    context_ = xfc::create_context(config_file_name);
     return false;
 }
 

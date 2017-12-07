@@ -10,11 +10,10 @@ class scanner_facade
 {
 	DECLARE_SINGLETON_DLL(scanner_facade, SCANNER_API)
 public:
-	SCANNER_API bool initialize(std::ifstream&& config);
+	SCANNER_API bool initialize(std::string const& config_file_name);
     SCANNER_API std::unique_ptr<out_lexeme_table> scan(std::istream& str);
 
 private:
-	std::vector<std::unique_ptr<scanner_context>> contexts_;
-	decltype(contexts_)::iterator current_context_;
+	std::unique_ptr<scanner_context> context_;
 };
 

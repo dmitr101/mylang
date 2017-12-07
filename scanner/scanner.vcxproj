@@ -109,6 +109,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(SolutionDir)$(Platform)\tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -143,6 +144,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(SolutionDir)$(Platform)\tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -152,7 +154,7 @@
     <ClInclude Include="char_class.h" />
     <ClInclude Include="char_state.h" />
     <ClInclude Include="stream_fsm.h" />
-    <ClInclude Include="fsm_constructor.h" />
+    <ClInclude Include="xml_contructors.h" />
     <ClInclude Include="scanner_common.h" />
     <ClInclude Include="scanner_context.h" />
     <ClInclude Include="scanner_exception.h" />
@@ -179,7 +181,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="fsm_constructor.cpp" />
+    <ClCompile Include="xml_contructors.cpp" />
     <ClCompile Include="scanner_context.cpp" />
     <ClCompile Include="scanner_exception.cpp" />
     <ClCompile Include="scanner_facade.cpp" />
