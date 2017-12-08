@@ -48,9 +48,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="fsm_constructor.h">
-      <Filter>Заголовочные файлы\xml_constructors</Filter>
-    </ClInclude>
     <ClInclude Include="char_class.h">
       <Filter>Заголовочные файлы\fsm</Filter>
     </ClInclude>
@@ -78,6 +75,12 @@
     <ClInclude Include="xml_helpers.h">
       <Filter>Заголовочные файлы\xml_constructors</Filter>
     </ClInclude>
+    <ClInclude Include="xml_contructors.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="pending_lexeme.h">
+      <Filter>Заголовочные файлы\fsm</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -85,9 +88,6 @@
     </ClCompile>
     <ClCompile Include="dllmain.cpp">
       <Filter>Файлы исходного кода</Filter>
-    </ClCompile>
-    <ClCompile Include="fsm_constructor.cpp">
-      <Filter>Файлы исходного кода\xml_constructors</Filter>
     </ClCompile>
     <ClCompile Include="transition.cpp">
       <Filter>Файлы исходного кода\fsm</Filter>
@@ -112,6 +112,12 @@
     </ClCompile>
     <ClCompile Include="xml_helpers.cpp">
       <Filter>Файлы исходного кода\xml_constructors</Filter>
+    </ClCompile>
+    <ClCompile Include="xml_contructors.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
+    <ClCompile Include="pending_lexeme.cpp">
+      <Filter>Файлы исходного кода\fsm</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

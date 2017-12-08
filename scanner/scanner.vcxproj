@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="char_class.h" />
     <ClInclude Include="char_state.h" />
+    <ClInclude Include="pending_lexeme.h" />
     <ClInclude Include="stream_fsm.h" />
     <ClInclude Include="xml_contructors.h" />
     <ClInclude Include="scanner_common.h" />
@@ -167,6 +168,7 @@
   <ItemGroup>
     <ClCompile Include="char_class.cpp" />
     <ClCompile Include="char_state.cpp" />
+    <ClCompile Include="pending_lexeme.cpp" />
     <ClCompile Include="stream_fsm.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
