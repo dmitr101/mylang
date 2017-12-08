@@ -12,12 +12,12 @@ public:
     SCANNER_API const char* what() const override;
 };
 
-class scanner_init_exception : public std::exception
+class scanner_exception : public std::exception
 {
 public:
-    scanner_init_exception() = default;
-    scanner_init_exception(char const* ini_err_line);
-    ~scanner_init_exception() = default;
+    scanner_exception() = default;
+    scanner_exception(char const* ini_err_line);
+    ~scanner_exception() = default;
     void push_err_line(char const* line);
 
     SCANNER_API BSTR msg() const;

@@ -2,27 +2,27 @@
 #include "scanner_exception.h"
 
 using namespace tinyxml2;
-scanner_init_exception* create_doc_parse_ex(tinyxml2::XMLDocument const& doc)
+scanner_exception* create_doc_parse_ex(tinyxml2::XMLDocument const& doc)
 {
-    scanner_init_exception* ex = new scanner_init_exception();
+    scanner_exception* ex = new scanner_exception();
     ex->push_err_line("Scanner config parse error!");
     ex->push_err_line("tinyxml2 error info:");
     ex->push_err_line(doc.ErrorStr());
     return ex;
 }
 
-scanner_init_exception* create_el_find_ex(std::string const& name)
+scanner_exception* create_el_find_ex(std::string const& name)
 {
-    scanner_init_exception* ex = new scanner_init_exception();
+    scanner_exception* ex = new scanner_exception();
     ex->push_err_line("Scanner config parse error!");
     ex->push_err_line("Couldn't find such element:");
     ex->push_err_line(name.c_str());
     return ex;
 }
 
-scanner_init_exception* create_attr_find_ex(tinyxml2::XMLElement const& el, std::string const& attr_name)
+scanner_exception* create_attr_find_ex(tinyxml2::XMLElement const& el, std::string const& attr_name)
 {
-    scanner_init_exception* ex = new scanner_init_exception();
+    scanner_exception* ex = new scanner_exception();
     ex->push_err_line("Scanner config parse error!");
     ex->push_err_line("Couldn't find attribute:");
     ex->push_err_line(attr_name.c_str());
@@ -33,9 +33,9 @@ scanner_init_exception* create_attr_find_ex(tinyxml2::XMLElement const& el, std:
     return ex;
 }
 
-scanner_init_exception* create_wrong_child_ex(tinyxml2::XMLElement const& parent, tinyxml2::XMLElement const& child, std::string const& expected)
+scanner_exception* create_wrong_child_ex(tinyxml2::XMLElement const& parent, tinyxml2::XMLElement const& child, std::string const& expected)
 {
-    scanner_init_exception* ex = new scanner_init_exception();
+    scanner_exception* ex = new scanner_exception();
     ex->push_err_line("Scanner config parse error!");
     ex->push_err_line("Unacceptable child:");
     ex->push_err_line(child.Name());

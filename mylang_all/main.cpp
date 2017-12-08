@@ -35,7 +35,7 @@ void log_parse_result(parse_result const& result)
 
 }
 
-void print_ole(scanner_init_exception* ex)
+void print_ole(scanner_exception* ex)
 {
     USES_CONVERSION;
     BSTR ole = ex->msg();
@@ -56,14 +56,10 @@ void run_translator(char const* src_file)
         auto result = parser.parse(*lexems);
         log_parse_result(*result);*/
     }
-    catch (scanner_init_exception* ex)
+    catch (scanner_exception* ex)
     {
         print_ole(ex);
         //print_error(c);
-    }
-    catch (scanner_scan_exception* ex)
-    {
-        print_error(ex->what());
     }
     catch (...)
     {

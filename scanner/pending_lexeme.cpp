@@ -1,12 +1,26 @@
 #include "pending_lexeme.h"
 
-
-
-pending_lexeme::pending_lexeme()
+void pending_lexeme::push_char(char c)
 {
+    data_.push_back(c);
 }
 
-
-pending_lexeme::~pending_lexeme()
+void pending_lexeme::set_type(temp_lex_type type)
 {
+    type_ = type;
+}
+
+temp_lex_type pending_lexeme::get_type() const
+{
+    return type_;
+}
+
+void pending_lexeme::complete()
+{
+    is_complete_ = true;
+}
+
+bool pending_lexeme::is_complete() const
+{
+    return is_complete_;
 }

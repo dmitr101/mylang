@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "compile_launch", "mylang_all\mylang_all.vcxproj", "{7A4E0C2C-278E-4C6D-AA24-725C1B5727B7}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -182,10 +182,10 @@ Global
 		{D1C528B6-AA02-4D29-9D61-DC08E317A70D}.Debug-Dll|x64.Build.0 = Debug-Dll|x64
 		{D1C528B6-AA02-4D29-9D61-DC08E317A70D}.Debug-Dll|x86.ActiveCfg = Debug-Dll|Win32
 		{D1C528B6-AA02-4D29-9D61-DC08E317A70D}.Debug-Dll|x86.Build.0 = Debug-Dll|Win32
-		{D1C528B6-AA02-4D29-9D61-DC08E317A70D}.Debug-Lib|x64.ActiveCfg = Debug-Lib|x64
-		{D1C528B6-AA02-4D29-9D61-DC08E317A70D}.Debug-Lib|x64.Build.0 = Debug-Lib|x64
-		{D1C528B6-AA02-4D29-9D61-DC08E317A70D}.Debug-Lib|x86.ActiveCfg = Debug-Lib|Win32
-		{D1C528B6-AA02-4D29-9D61-DC08E317A70D}.Debug-Lib|x86.Build.0 = Debug-Lib|Win32
+		{D1C528B6-AA02-4D29-9D61-DC08E317A70D}.Debug-Lib|x64.ActiveCfg = Debug-Dll|x64
+		{D1C528B6-AA02-4D29-9D61-DC08E317A70D}.Debug-Lib|x64.Build.0 = Debug-Dll|x64
+		{D1C528B6-AA02-4D29-9D61-DC08E317A70D}.Debug-Lib|x86.ActiveCfg = Debug-Dll|Win32
+		{D1C528B6-AA02-4D29-9D61-DC08E317A70D}.Debug-Lib|x86.Build.0 = Debug-Dll|Win32
 		{D1C528B6-AA02-4D29-9D61-DC08E317A70D}.Release|x64.ActiveCfg = Release-Dll|x64
 		{D1C528B6-AA02-4D29-9D61-DC08E317A70D}.Release|x64.Build.0 = Release-Dll|x64
 		{D1C528B6-AA02-4D29-9D61-DC08E317A70D}.Release|x86.ActiveCfg = Release-Lib|Win32

@@ -25,9 +25,9 @@ namespace
         return{ name_str, rexp };
     }
 
-    scanner_init_exception* create_repeating_classes_ex(std::string const& class_name, size_t line)
+    scanner_exception* create_repeating_classes_ex(std::string const& class_name, size_t line)
     {
-        scanner_init_exception* ex = new scanner_init_exception();
+        scanner_exception* ex = new scanner_exception();
         ex->push_err_line("Scanner config parse error!");
         ex->push_err_line("Repeating class name: ");
         ex->push_err_line(class_name.c_str());
