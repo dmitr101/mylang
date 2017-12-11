@@ -7,6 +7,16 @@ void state_base::add_transition(transition const& trans)
     transitions_.push_back(trans);
 }
 
+void state_base::set_name(std::string const& name)
+{
+    name_ = name;
+}
+
+std::string const& state_base::get_name()
+{
+    return name_;
+}
+
 bool state_base::should_pop_char() const
 {
 	return get_state_type() == state_type::accumulate;

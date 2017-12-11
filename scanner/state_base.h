@@ -21,6 +21,8 @@ public:
     virtual ~state_base() = default;
 
 	void add_transition(transition const& trans);
+    void set_name(std::string const& name);
+    std::string const& get_name();
 
     virtual state_type get_state_type() const = 0;
     virtual bool should_pop_char() const;
@@ -31,6 +33,7 @@ protected:
 	transition_iter get_transition(char c) const;
 
 protected:
+    std::string name_;
 	transition_vector transitions_;
 };
 

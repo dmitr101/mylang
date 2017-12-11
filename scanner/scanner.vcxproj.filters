@@ -97,7 +97,7 @@
       <Filter>Заголовочные файлы\fsm\states</Filter>
     </ClInclude>
     <ClInclude Include="state_base.h">
-      <Filter>Заголовочные файлы</Filter>
+      <Filter>Заголовочные файлы\fsm\states</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
