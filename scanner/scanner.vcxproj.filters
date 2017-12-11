@@ -81,9 +81,6 @@
     <ClInclude Include="pending_lexeme.h">
       <Filter>Заголовочные файлы\fsm</Filter>
     </ClInclude>
-    <ClInclude Include="char_state.h">
-      <Filter>Заголовочные файлы\fsm\states</Filter>
-    </ClInclude>
     <ClInclude Include="state_helper_macro.h">
       <Filter>Заголовочные файлы\fsm\states</Filter>
     </ClInclude>
@@ -98,6 +95,9 @@
     </ClInclude>
     <ClInclude Include="state_err.h">
       <Filter>Заголовочные файлы\fsm\states</Filter>
+    </ClInclude>
+    <ClInclude Include="state_base.h">
+      <Filter>Заголовочные файлы</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -137,13 +137,13 @@
     <ClCompile Include="state_default.cpp">
       <Filter>Файлы исходного кода\fsm\states</Filter>
     </ClCompile>
-    <ClCompile Include="char_state.cpp">
-      <Filter>Файлы исходного кода\fsm\states</Filter>
-    </ClCompile>
     <ClCompile Include="state_accum.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
     <ClCompile Include="state_err.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
+    <ClCompile Include="state_base.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
   </ItemGroup>

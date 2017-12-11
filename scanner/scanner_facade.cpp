@@ -9,5 +9,6 @@ bool scanner_facade::initialize(std::string const& config_file_name)
 
 std::unique_ptr<out_lexeme_table> scanner_facade::scan(std::istream & str)
 {
-    return{ nullptr };
+    context_->scan(str);
+    return context_->get_result();
 }

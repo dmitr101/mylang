@@ -2,6 +2,11 @@
 
 
 
+size_t out_lexeme_table::get_next_index() const
+{
+    return all_.size();
+}
+
 void out_lexeme_table::push_lexeme(std::shared_ptr<lexeme> lex)
 {
 

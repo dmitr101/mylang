@@ -4,15 +4,22 @@
 class scanner_context
 {
 public:
-	scanner_context();
-	~scanner_context();
+    scanner_context();
+    ~scanner_context() = default;
+
+    void scan(std::istream& input_stream);
+    std::unique_ptr<out_lexeme_table>&& get_result();
 
 private:
-	out_lexeme_table out_table_;
-	bool is_out_table_ready_;
-	std::set<std::string> keywords_;
-	std::unique_ptr<std::istream> char_stream_;
-	stream_fsm fsm_;
-	size_t current_line_;
+    void handle_pending_lexeme(pending_lexeme&& lex);
+    void handle_pending_err(pending_lexeme&& lex);
+    size_t create_id(pending_lexeme const& lex);
+
+private:
+    std::unique_ptr<out_lexeme_table> result_;
+
+    std::set<std::string> keywords_;
+    stream_fsm fsm_;
+    size_t current_line_;
 };
 
