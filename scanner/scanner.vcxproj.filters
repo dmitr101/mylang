@@ -100,7 +100,10 @@
       <Filter>Заголовочные файлы\fsm\states</Filter>
     </ClInclude>
     <ClInclude Include="state_factory.h">
-      <Filter>Заголовочные файлы</Filter>
+      <Filter>Заголовочные файлы\fsm\states</Filter>
+    </ClInclude>
+    <ClInclude Include="state_registration.h">
+      <Filter>Заголовочные файлы\fsm\states</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -140,17 +143,14 @@
     <ClCompile Include="state_default.cpp">
       <Filter>Файлы исходного кода\fsm\states</Filter>
     </ClCompile>
-    <ClCompile Include="state_accum.cpp">
-      <Filter>Файлы исходного кода</Filter>
-    </ClCompile>
     <ClCompile Include="state_err.cpp">
-      <Filter>Файлы исходного кода</Filter>
+      <Filter>Файлы исходного кода\fsm\states</Filter>
+    </ClCompile>
+    <ClCompile Include="state_accum.cpp">
+      <Filter>Файлы исходного кода\fsm\states</Filter>
     </ClCompile>
     <ClCompile Include="state_base.cpp">
-      <Filter>Файлы исходного кода</Filter>
-    </ClCompile>
-    <ClCompile Include="state_factory.cpp">
-      <Filter>Файлы исходного кода</Filter>
+      <Filter>Файлы исходного кода\fsm\states</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

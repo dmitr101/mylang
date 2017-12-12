@@ -1,8 +1,20 @@
 #include "scanner_context.h"
+#include "state_accum.h"
+#include "state_default.h"
+#include "state_err.h"
+#include "state_factory.h"
 #include "../core/lexeme_builder.h"
 
 namespace
 {
+    void register_states()
+    {
+        auto& factory = state_factory::get_instance();
+        factory.register_state<state_accum>();
+        factory.register_state<state_default>();
+        factory.register_state<state_err>();
+    }
+
     lexeme_type convert(temp_lex_type t)
     {
         return lexeme_type::unknown;
@@ -11,6 +23,7 @@ namespace
 
 scanner_context::scanner_context()
 {
+    register_states();
     result_ = std::make_unique<out_lexeme_table>();
 }
 

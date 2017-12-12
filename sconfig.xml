@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <scanner>
+	<keywords>
+		<keyword name = "module"/>
+		<keyword name = "if"/>
+		<keyword name = "else"/>
+		<keyword name = "do"/>
+		<keyword name = "while"/>
+		<keyword name = "end"/>
+		<keyword name = "read"/>
+		<keyword name = "write"/>
+	</keywords>
 	<classes>
 		<!--General characters-->
 		<class name = "digit" rexp = "\d"/>
@@ -22,8 +32,8 @@
 		<class name = "cbr" rexp = "[)]"/>
 	</classes>
 	<states>
-		<state name = "default">
-			<transition class = "" state = ""/>
+		<state name = "default" type = "state_default">
+			<transition class = "digit" state = ""/>
 		</state>
 		
 	</states>

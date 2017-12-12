@@ -152,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="char_class.h" />
+    <ClInclude Include="state_registration.h" />
     <ClInclude Include="state_base.h" />
     <ClInclude Include="pending_lexeme.h" />
     <ClInclude Include="state_accum.h" />
@@ -177,7 +178,6 @@
     <ClCompile Include="state_accum.cpp" />
     <ClCompile Include="state_default.cpp" />
     <ClCompile Include="state_err.cpp" />
-    <ClCompile Include="state_factory.cpp" />
     <ClCompile Include="stream_fsm.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
