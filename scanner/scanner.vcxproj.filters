@@ -153,7 +153,7 @@
       <Filter>Файлы исходного кода\inner</Filter>
     </ClCompile>
     <ClCompile Include="scanner_private_builder.cpp">
-      <Filter>Файлы исходного кода</Filter>
+      <Filter>Файлы исходного кода\inner</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

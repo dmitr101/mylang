@@ -2,12 +2,14 @@
 #include "scanner_exception.h"
 
 stream_fsm::stream_fsm(stream_fsm&& other)
-{
-
-}
+    : current_(std::move(other.current_))
+    , state_map_(std::move(other.state_map_))
+{}
 
 stream_fsm& stream_fsm::operator=(stream_fsm&& other)
 {
+    current_ = std::move(other.current_);
+    state_map_ = std::move(other.state_map_);
     return *this;
 }
 
