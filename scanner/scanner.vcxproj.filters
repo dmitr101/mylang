@@ -69,9 +69,6 @@
     <ClInclude Include="scanner_exception.h">
       <Filter>Заголовочные файлы\out</Filter>
     </ClInclude>
-    <ClInclude Include="scanner_context.h">
-      <Filter>Заголовочные файлы\inner</Filter>
-    </ClInclude>
     <ClInclude Include="scanner_common.h">
       <Filter>Заголовочные файлы\inner</Filter>
     </ClInclude>
@@ -102,8 +99,11 @@
     <ClInclude Include="state_factory.h">
       <Filter>Заголовочные файлы\fsm\states</Filter>
     </ClInclude>
-    <ClInclude Include="state_registration.h">
-      <Filter>Заголовочные файлы\fsm\states</Filter>
+    <ClInclude Include="scanner_private.h">
+      <Filter>Заголовочные файлы\inner</Filter>
+    </ClInclude>
+    <ClInclude Include="scanner_private_builder.h">
+      <Filter>Заголовочные файлы\inner</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -121,9 +121,6 @@
     </ClCompile>
     <ClCompile Include="char_class.cpp">
       <Filter>Файлы исходного кода\fsm</Filter>
-    </ClCompile>
-    <ClCompile Include="scanner_context.cpp">
-      <Filter>Файлы исходного кода\inner</Filter>
     </ClCompile>
     <ClCompile Include="scanner_exception.cpp">
       <Filter>Файлы исходного кода\out</Filter>
@@ -151,6 +148,12 @@
     </ClCompile>
     <ClCompile Include="state_base.cpp">
       <Filter>Файлы исходного кода\fsm\states</Filter>
+    </ClCompile>
+    <ClCompile Include="scanner_private.cpp">
+      <Filter>Файлы исходного кода\inner</Filter>
+    </ClCompile>
+    <ClCompile Include="scanner_private_builder.cpp">
+      <Filter>Файлы исходного кода</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

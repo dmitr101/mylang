@@ -152,7 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="char_class.h" />
-    <ClInclude Include="state_registration.h" />
+    <ClInclude Include="scanner_private_builder.h" />
     <ClInclude Include="state_base.h" />
     <ClInclude Include="pending_lexeme.h" />
     <ClInclude Include="state_accum.h" />
@@ -163,7 +163,7 @@
     <ClInclude Include="stream_fsm.h" />
     <ClInclude Include="xml_contructors.h" />
     <ClInclude Include="scanner_common.h" />
-    <ClInclude Include="scanner_context.h" />
+    <ClInclude Include="scanner_private.h" />
     <ClInclude Include="scanner_exception.h" />
     <ClInclude Include="scanner_facade.h" />
     <ClInclude Include="stdafx.h" />
@@ -173,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="char_class.cpp" />
+    <ClCompile Include="scanner_private_builder.cpp" />
     <ClCompile Include="state_base.cpp" />
     <ClCompile Include="pending_lexeme.cpp" />
     <ClCompile Include="state_accum.cpp" />
@@ -194,7 +195,7 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="xml_contructors.cpp" />
-    <ClCompile Include="scanner_context.cpp" />
+    <ClCompile Include="scanner_private.cpp" />
     <ClCompile Include="scanner_exception.cpp" />
     <ClCompile Include="scanner_facade.cpp" />
     <ClCompile Include="stdafx.cpp" />

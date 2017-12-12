@@ -1,4 +1,4 @@
-#include "scanner_context.h"
+#include "scanner_private.h"
 #include "state_accum.h"
 #include "state_default.h"
 #include "state_err.h"
@@ -21,13 +21,13 @@ namespace
     }
 }
 
-scanner_context::scanner_context()
+scanner_private::scanner_private()
 {
     register_states();
     result_ = std::make_unique<out_lexeme_table>();
 }
 
-void scanner_context::scan(std::istream& input_stream)
+void scanner_private::scan(std::istream& input_stream)
 {
     while (!input_stream.eof())
     {
@@ -41,12 +41,12 @@ void scanner_context::scan(std::istream& input_stream)
     }
 }
 
-std::unique_ptr<out_lexeme_table>&& scanner_context::get_result()
+std::unique_ptr<out_lexeme_table>&& scanner_private::get_result()
 {
     return std::move(result_);
 }
 
-void scanner_context::handle_pending_lexeme(pending_lexeme&& lex)
+void scanner_private::handle_pending_lexeme(pending_lexeme&& lex)
 {
     auto builder = lexeme_builder()
         .set_index(result_->get_next_index())
@@ -56,12 +56,12 @@ void scanner_context::handle_pending_lexeme(pending_lexeme&& lex)
     result_->emplace_lexeme(std::move(builder));
 }
 
-void scanner_context::handle_pending_err(pending_lexeme&& lex)
+void scanner_private::handle_pending_err(pending_lexeme&& lex)
 {
 
 }
 
-size_t scanner_context::create_id(pending_lexeme const& lex)
+size_t scanner_private::create_id(pending_lexeme const& lex)
 {
     return 0;
 }

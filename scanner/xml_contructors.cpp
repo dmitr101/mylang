@@ -3,12 +3,16 @@
 #include "scanner_exception.h"
 #include "char_class.h"
 #include <map>
+#include <set>
+#include "scanner_private_builder.h"
 
 namespace
 {
-    char const* const ROOT_NODE = "scanner";
-    char const* const CLASSES_NODE = "classes";
-    char const* const CLASS_NODE = "class";
+    char const* const ROOT_TAG = "scanner";
+    char const* const KEYWORDS_TAG = "keywords";
+    char const* const KEYWORD_TAG = "keyword";
+    char const* const CLASSES_TAG = "classes";
+    char const* const CLASS_TAG = "class";
     char const* const NAME_ATTR = "name";
     char const* const REXP_ATTR = "rexp";
 }
@@ -38,7 +42,7 @@ namespace
 
     std::map<std::string, char_class> create_classes(XMLElement const& root)
     {
-        auto& classes = get_first_child(root, CLASSES_NODE);
+        auto& classes = get_first_child(root, CLASSES_TAG);
         std::map<std::string, char_class> result;
         for_each_child_check_name(classes, 
         [&result](auto const& class_node)
@@ -49,20 +53,38 @@ namespace
             {
                 throw create_repeating_classes_ex(cl.get_name(), class_node.GetLineNum());
             }
-        }, CLASS_NODE);
+        }, CLASS_TAG);
+        return result;
+    }
+
+    std::vector<std::string> get_keywords(XMLElement const& root)
+    {
+        auto& keywords = get_first_child(root, KEYWORDS_TAG);
+        std::vector<std::string> result;
+        for_each_child_check_name(keywords,
+            [&result](auto const& keyword_tag)
+        {
+            auto keyword = get_attr(keyword_tag, NAME_ATTR);
+            result.emplace_back(std::move(keyword));
+        }, KEYWORD_TAG);
         return result;
     }
 }
 
 namespace xml_fsm_constructors
 {
-    std::unique_ptr<scanner_context> create_context(std::string const& config_file_name)
+
+
+    std::unique_ptr<scanner_private> create_context(std::string const& config_file_name)
     {
         auto doc = load_doc(config_file_name);
-        auto& root = get_first_child(*doc, ROOT_NODE);
+        auto& root = get_first_child(*doc, ROOT_TAG);
+
+        scanner_private_builder builder;
+        builder.add_keywords(get_keywords(root));
+
         auto classes = create_classes(root);
 
-        auto result = std::make_unique<scanner_context>();
-        return result;
+        return builder.get();
     }
 }

@@ -1,11 +1,12 @@
 #pragma once
 #include "stream_fsm.h"
 #include "../core/out_lexeme_table.h"
-class scanner_context
+class scanner_private
 {
+    friend class scanner_private_builder;
 public:
-    scanner_context();
-    ~scanner_context() = default;
+    scanner_private();
+    ~scanner_private() = default;
 
     void scan(std::istream& input_stream);
     std::unique_ptr<out_lexeme_table>&& get_result();
