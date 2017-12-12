@@ -16,7 +16,8 @@ public:
 	~pending_lexeme() = default;
 
     void push_char(char c);
-    std::string&& get_data();
+    std::string&& retrieve_data();
+    std::string const& get_data() const;
     void set_type(temp_lex_type type);
     temp_lex_type get_type() const;
     void complete();

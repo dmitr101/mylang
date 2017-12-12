@@ -9,11 +9,12 @@ public:
     ~scanner_private() = default;
 
     void scan(std::istream& input_stream);
-    std::unique_ptr<out_lexeme_table>&& get_result();
+    std::unique_ptr<out_lexeme_table> get_result();
 
 private:
+    lexeme_type get_type(pending_lexeme const& lex);
     void handle_pending_lexeme(pending_lexeme&& lex);
-    void handle_pending_err(pending_lexeme&& lex);
+    void handle_pending_err(pending_lexeme const& lex);
     size_t create_id(pending_lexeme const& lex);
 
 private:

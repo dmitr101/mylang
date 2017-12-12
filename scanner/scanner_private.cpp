@@ -14,11 +14,6 @@ namespace
         factory.register_state<state_default>();
         factory.register_state<state_err>();
     }
-
-    lexeme_type convert(temp_lex_type t)
-    {
-        return lexeme_type::unknown;
-    }
 }
 
 scanner_private::scanner_private()
@@ -42,7 +37,7 @@ void scanner_private::scan(std::istream& input_stream)
     }
 }
 
-std::unique_ptr<out_lexeme_table>&& scanner_private::get_result()
+std::unique_ptr<out_lexeme_table> scanner_private::get_result()
 {
     return std::move(result_);
 }
@@ -52,12 +47,12 @@ void scanner_private::handle_pending_lexeme(pending_lexeme&& lex)
     auto builder = lexeme_builder()
         .set_index(result_->get_next_index())
         .set_id(create_id(lex))
-        .set_type(convert(lex.get_type()))
-        .set_data(std::move(lex.get_data()));
+        .set_type(get_type(lex))
+        .set_data(std::move(lex.retrieve_data()));
     result_->emplace_lexeme(std::move(builder));
 }
 
-void scanner_private::handle_pending_err(pending_lexeme&& lex)
+void scanner_private::handle_pending_err(pending_lexeme const& lex)
 {
 
 }
@@ -65,4 +60,26 @@ void scanner_private::handle_pending_err(pending_lexeme&& lex)
 size_t scanner_private::create_id(pending_lexeme const& lex)
 {
     return 0;
+}
+
+lexeme_type scanner_private::get_type(pending_lexeme const& lex)
+{
+    lexeme_type result = lexeme_type::unknown;
+    switch (lex.get_type())
+    {
+    case temp_lex_type::delim:
+        result = lexeme_type::delim;
+        break;
+    case temp_lex_type::id_or_keyword:
+        result = keywords_.find(lex.get_data()) != keywords_.end() ?
+            lexeme_type::keyword : lexeme_type::id;
+        break;
+    case temp_lex_type::literal:
+        result = lexeme_type::literal;
+        break;
+    default:
+        result = lexeme_type::unknown;
+        handle_pending_err(lex);
+    }
+    return result;
 }

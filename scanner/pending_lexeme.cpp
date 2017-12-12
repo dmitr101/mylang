@@ -5,9 +5,14 @@ void pending_lexeme::push_char(char c)
     data_.push_back(c);
 }
 
-std::string&& pending_lexeme::get_data()
+std::string&& pending_lexeme::retrieve_data()
 {
     return std::move(data_);
+}
+
+std::string const& pending_lexeme::get_data() const
+{
+    return data_;
 }
 
 void pending_lexeme::set_type(temp_lex_type type)
