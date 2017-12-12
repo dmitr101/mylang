@@ -4,7 +4,7 @@
 class transition
 {
 public:
-    transition();
+    transition(char_class const& cl, std::string const& target_state);
     ~transition();
 
 	bool is_usable(char c) const;

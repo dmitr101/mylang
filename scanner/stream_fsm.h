@@ -11,7 +11,9 @@ using state_map = std::map<std::string, std::shared_ptr<state_base>>;
 class stream_fsm
 {
 public:
-	stream_fsm() = default;
+    stream_fsm() = default;
+    stream_fsm(stream_fsm&& other);
+    stream_fsm& operator=(stream_fsm&& other);
 	~stream_fsm() = default;
 
     void set_current_state(std::string const& state);

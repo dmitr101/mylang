@@ -33,7 +33,7 @@
 	</classes>
 	<states>
 		<state name = "default" type = "state_default">
-			<transition class = "digit" state = ""/>
+			<transition class = "digit" target = ""/>
 		</state>
 		
 	</states>

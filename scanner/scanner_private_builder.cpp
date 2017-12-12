@@ -10,6 +10,7 @@ scanner_private_builder::scanner_private_builder()
 scanner_private_builder& scanner_private_builder::set_fsm(stream_fsm&& fsm)
 {
     result_->fsm_ = std::move(fsm);
+    return *this;
 }
 
 scanner_private_builder& scanner_private_builder::add_keyword(std::string const& keyword)

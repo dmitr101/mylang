@@ -22,6 +22,7 @@ namespace
 }
 
 scanner_private::scanner_private()
+    : current_line_(0)
 {
     register_states();
     result_ = std::make_unique<out_lexeme_table>();

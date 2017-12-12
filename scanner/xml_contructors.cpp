@@ -5,16 +5,25 @@
 #include <map>
 #include <set>
 #include "scanner_private_builder.h"
+#include "state_factory.h"
 
 namespace
 {
-    char const* const ROOT_TAG = "scanner";
-    char const* const KEYWORDS_TAG = "keywords";
-    char const* const KEYWORD_TAG = "keyword";
-    char const* const CLASSES_TAG = "classes";
-    char const* const CLASS_TAG = "class";
-    char const* const NAME_ATTR = "name";
-    char const* const REXP_ATTR = "rexp";
+    char const* const ROOT_TAG      = "scanner";
+    char const* const KEYWORDS_TAG  = "keywords";
+    char const* const KEYWORD_TAG   = "keyword";
+    char const* const CLASSES_TAG   = "classes";
+    char const* const CLASS_TAG     = "class";
+    char const* const STATES_TAG    = "states";
+    char const* const STATE_TAG     = "state";
+                                    
+    char const* const NAME_ATTR     = "name";
+    char const* const TYPE_ATTR     = "type";
+    char const* const CLASS_ATTR    = "class";
+    char const* const TARGET_ATTR   = "target";
+    char const* const REXP_ATTR     = "rexp";
+
+    char const* const DEFAULT_STATE = "default";
 }
 
 using namespace xml_helpers;
@@ -69,6 +78,43 @@ namespace
         }, KEYWORD_TAG);
         return result;
     }
+
+    std::shared_ptr<state_base> create_state(XMLElement const& node, std::map<std::string, char_class> const& classes)
+    {
+        auto type = get_attr(node, TYPE_ATTR);
+        auto result = state_factory::get_instance().create(type);
+        result->set_name(get_attr(node, NAME_ATTR));
+        for_each_child_check_name(node,
+            [&result, &classes](auto const& transition_tag)
+        {
+            auto transition_class_attr = get_attr(transition_tag, CLASS_ATTR);
+            auto transition_target_attr = get_attr(transition_tag, TARGET_ATTR);
+            auto transition_class = classes.find(transition_class_attr)->second;
+            result->add_transition(transition(transition_class, transition_target_attr));
+        }, KEYWORD_TAG);
+
+        return std::shared_ptr<state_base>(result.release());
+    }
+
+    stream_fsm create_fsm(XMLElement const& root)
+    {
+        auto classes = create_classes(root);
+        auto& states = get_first_child(root, STATES_TAG);
+        std::vector<std::shared_ptr<state_base>> ready_states;
+        for_each_child_check_name(states,
+            [&ready_states, &classes](auto const& state_tag)
+        {
+            auto state = create_state(state_tag, classes);
+            ready_states.emplace_back(std::move(state));
+        }, STATE_TAG);
+        stream_fsm result;
+        result.set_current_state(DEFAULT_STATE);
+        for (auto state : ready_states)
+        {
+            result.emplace_state(state);
+        }
+        return std::move(result);
+    }
 }
 
 namespace xml_fsm_constructors
@@ -82,8 +128,7 @@ namespace xml_fsm_constructors
 
         scanner_private_builder builder;
         builder.add_keywords(get_keywords(root));
-
-        auto classes = create_classes(root);
+        builder.set_fsm(std::move(create_fsm(root)));
 
         return builder.get();
     }

@@ -1,6 +1,16 @@
 #include "stream_fsm.h"
 #include "scanner_exception.h"
 
+stream_fsm::stream_fsm(stream_fsm&& other)
+{
+
+}
+
+stream_fsm& stream_fsm::operator=(stream_fsm&& other)
+{
+    return *this;
+}
+
 void stream_fsm::set_current_state(std::string const& state)
 {
     current_ = state;
