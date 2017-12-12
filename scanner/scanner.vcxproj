@@ -157,6 +157,7 @@
     <ClInclude Include="state_accum.h" />
     <ClInclude Include="state_default.h" />
     <ClInclude Include="state_err.h" />
+    <ClInclude Include="state_factory.h" />
     <ClInclude Include="state_helper_macro.h" />
     <ClInclude Include="stream_fsm.h" />
     <ClInclude Include="xml_contructors.h" />
@@ -176,6 +177,7 @@
     <ClCompile Include="state_accum.cpp" />
     <ClCompile Include="state_default.cpp" />
     <ClCompile Include="state_err.cpp" />
+    <ClCompile Include="state_factory.cpp" />
     <ClCompile Include="stream_fsm.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>

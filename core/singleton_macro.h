@@ -25,5 +25,5 @@
 	FORBID_CONSTRUCTORS(classname)	 \
 	CREATE_ACCESSOR(classname, DLL)
 
-#define DECLARE_SINGLETON_DEFAULT(classname, DLL) \
+#define DECLARE_SINGLETON_DEFAULT(classname) \
 	DECLARE_SINGLETON_DLL(classname, )

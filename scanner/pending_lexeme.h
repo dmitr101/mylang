@@ -21,6 +21,7 @@ public:
     temp_lex_type get_type() const;
     void complete();
     bool is_complete() const;
+    bool is_valid() const;
 
 private:
 	std::string data_;

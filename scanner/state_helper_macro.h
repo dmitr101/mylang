@@ -10,4 +10,4 @@
         static std::string get_xml_tag()                \
         {                                               \
             return #classname;                          \
-        }
+        }                                               

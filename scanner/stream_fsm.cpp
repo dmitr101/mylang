@@ -27,16 +27,16 @@ bool stream_fsm::get_next(std::istream& str, pending_lexeme& pending)
         current_ = state->next_state(c);
         if (pending.is_complete())
         {
-            return true;
+            break;
         }
     } while (true);
-    return false;
+    return pending.is_valid();
 }
 
 void stream_fsm::generate_unknown_state_ex()
 {
     auto ex = new scanner_exception();
-    ex->push_err_line("Scanner config parse error!");
+    ex->push_err_line("Scan error!");
     ex->push_err_line("Unknown state:");
     ex->push_err_line(current_.c_str());
     throw ex;
