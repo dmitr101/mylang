@@ -105,6 +105,15 @@
     <ClInclude Include="scanner_private_builder.h">
       <Filter>Заголовочные файлы\inner</Filter>
     </ClInclude>
+    <ClInclude Include="state_literal.h">
+      <Filter>Заголовочные файлы\fsm\states</Filter>
+    </ClInclude>
+    <ClInclude Include="state_delim.h">
+      <Filter>Заголовочные файлы\fsm\states</Filter>
+    </ClInclude>
+    <ClInclude Include="state_id.h">
+      <Filter>Заголовочные файлы\fsm\states</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -154,6 +163,15 @@
     </ClCompile>
     <ClCompile Include="scanner_private_builder.cpp">
       <Filter>Файлы исходного кода\inner</Filter>
+    </ClCompile>
+    <ClCompile Include="state_delim.cpp">
+      <Filter>Файлы исходного кода\fsm\states</Filter>
+    </ClCompile>
+    <ClCompile Include="state_id.cpp">
+      <Filter>Файлы исходного кода\fsm\states</Filter>
+    </ClCompile>
+    <ClCompile Include="state_literal.cpp">
+      <Filter>Файлы исходного кода\fsm\states</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
