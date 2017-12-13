@@ -27,7 +27,7 @@ std::string state_base::next_state(char c) const
     auto it = get_transition(c);
     if (it == transitions_.end())
     {
-        return state_err::get_xml_tag();
+        return state_err::get_default_name();
     }
     return it->get_target();
 }

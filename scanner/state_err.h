@@ -10,5 +10,7 @@ public:
 
     virtual state_type get_state_type() const override;
     virtual void apply(char c, pending_lexeme& lex) const;
+
+    static std::string get_default_name();
 };
 
