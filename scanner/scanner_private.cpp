@@ -4,6 +4,9 @@
 #include "state_err.h"
 #include "state_factory.h"
 #include "../core/lexeme_builder.h"
+#include "state_delim.h"
+#include "state_literal.h"
+#include "state_id.h"
 
 namespace
 {
@@ -13,6 +16,10 @@ namespace
         factory.register_state<state_accum>();
         factory.register_state<state_default>();
         factory.register_state<state_err>();
+        factory.register_state<state_delim>();
+        factory.register_state<state_literal>();
+        factory.register_state<state_id>();
+
     }
 }
 

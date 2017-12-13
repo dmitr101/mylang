@@ -6,7 +6,7 @@
 #include <set>
 #include "scanner_private_builder.h"
 #include "state_factory.h"
-
+#pragma optimize("", off)
 namespace
 {
     char const* const ROOT_TAG      = "scanner";
@@ -16,6 +16,7 @@ namespace
     char const* const CLASS_TAG     = "class";
     char const* const STATES_TAG    = "states";
     char const* const STATE_TAG     = "state";
+    char const* const TRANS_TAG     = "transition";
                                     
     char const* const NAME_ATTR     = "name";
     char const* const TYPE_ATTR     = "type";
@@ -91,7 +92,7 @@ namespace
             auto transition_target_attr = get_attr(transition_tag, TARGET_ATTR);
             auto transition_class = classes.find(transition_class_attr)->second;
             result->add_transition(transition(transition_class, transition_target_attr));
-        }, KEYWORD_TAG);
+        }, TRANS_TAG);
 
         return std::shared_ptr<state_base>(result.release());
     }

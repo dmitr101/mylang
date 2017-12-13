@@ -69,14 +69,15 @@ tinyxml2::XMLElement const& xml_helpers::get_first_child(tinyxml2::XMLNode const
     }
     return *result;
 }
-
-void xml_helpers::for_each_child_check_name(tinyxml2::XMLElement const& el, std::function<void(tinyxml2::XMLElement const&)> func, std::string const& child_name)
+#pragma optimize("", off)
+void xml_helpers::for_each_child_check_name(tinyxml2::XMLElement const& el, std::function<void(tinyxml2::XMLElement const&)> func, std::string const& expected_name)
 {
     for (auto child = el.FirstChildElement(); child != nullptr; child = child->NextSiblingElement())
     {
-        if (!child_name.empty() && child_name != el.Name())
+        auto child_name = child->Name();
+        if (!expected_name.empty() && expected_name != child_name)
         {
-            throw create_wrong_child_ex(el, *child, child_name);
+            throw create_wrong_child_ex(el, *child, expected_name);
         }
         func(*child);
     }
