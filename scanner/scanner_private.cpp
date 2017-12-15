@@ -34,13 +34,9 @@ void scanner_private::scan(std::istream& input_stream)
 {
     while (!input_stream.eof())
     {
-        pending_lexeme lex;
-        if (!fsm_.get_next(input_stream, lex))
-        {
-            handle_pending_err(std::move(lex));
-            return;
-        }
-        handle_pending_lexeme(std::move(lex));
+        remove_leading_spaces(input_stream);
+        retrieve_next_lexeme(input_stream);
+        switch_line(input_stream);
     }
 }
 
@@ -64,9 +60,37 @@ void scanner_private::handle_pending_err(pending_lexeme const& lex)
 
 }
 
+void scanner_private::switch_line(std::istream& input_stream)
+{
+    if (input_stream.peek() == '\n')
+    {
+        input_stream.get();
+        current_line_++;
+    }
+}
+
 size_t scanner_private::create_id(pending_lexeme const& lex)
 {
     return 0;
+}
+
+void scanner_private::retrieve_next_lexeme(std::istream& input_stream)
+{
+    pending_lexeme lex;
+    if (!fsm_.get_next(input_stream, lex))
+    {
+        handle_pending_err(lex);
+        return;
+    }
+    handle_pending_lexeme(std::move(lex));
+}
+
+void scanner_private::remove_leading_spaces(std::istream& input_stream)
+{
+    while (input_stream.peek() == ' ' || input_stream.peek() == '\t')
+    {
+        input_stream.get();
+    }
 }
 
 lexeme_type scanner_private::get_type(pending_lexeme const& lex)

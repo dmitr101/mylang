@@ -37,5 +37,5 @@ bool pending_lexeme::is_complete() const
 
 bool pending_lexeme::is_valid() const
 {
-    return type_ == temp_lex_type::invalid;
+    return type_ != temp_lex_type::invalid;
 }

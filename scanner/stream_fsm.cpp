@@ -36,7 +36,7 @@ bool stream_fsm::get_next(std::istream& str, pending_lexeme& pending)
         auto c = state->should_pop_char() ?
                         str.get() : str.peek();
         state->apply(c, pending);
-        current_ = state->next_state(c);
+        current_ = state->next_state(str.peek());
         if (pending.is_complete())
         {
             break;

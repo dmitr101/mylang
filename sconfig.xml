@@ -21,20 +21,50 @@
 		<class name = "mul" rexp = "[*]"/>
 		<class name = "div" rexp = "[/]"/>
 		<!--Comparison characters-->
-		<class name = "less" rexp = "<"/>
-		<class name = "greater" rexp = ">"/>
+		<class name = "less" rexp = "[<]"/>
+		<class name = "greater" rexp = "[>]"/>
+		<class name = "not" rexp = "[!]"/>
 		<!--Delim characters-->
 		<class name = "dot" rexp = "[.]"/>
 		<class name = "comma" rexp = "[,]"/>
-		<class name = "col" rexp = "[:]"/>
-		<class name = "scol" rexp = "[;]"/>
-		<class name = "obr" rexp = "[(]"/>
-		<class name = "cbr" rexp = "[)]"/>
+		<class name = "sep" rexp = "[:;()]"/>
+		<class name = "spc" rexp = "[ ]"/>
 	</classes>
 	<states>
-		<state name = "default" type = "state_default">
-			<transition class = "digit" target = ""/>
+		<!--First and default state-->
+		<state name = "default" type = "state_default" result = "default_error">
+			<transition class = "digit" target = "number_lit0"/>
+			<transition class = "letter" target = "id_trm"/>
+			<transition class = "greater" target = "grtr/>
 		</state>
-		
+		<!--Numbers-->
+		<state name = "number_lit0" type = "state_accum" result = "number_literal">
+			<transition class = "digit" target = "number_lit0"/>
+			<transition class = "dot" target = "number_lit0"/>
+			<transition class = "letter" target = "default_error"/>
+		</state>
+		<state name = "number_lit1" type = "state_accum" result = "number_literal">
+			<transition class = "digit" target = "number_lit1"/>
+			<transition class = "dot" target = "default_error"/>
+			<transition class = "letter" target = "default_error"/>
+		</state>
+		<!--IDs/Terms-->
+		<state name = "id_trm" type = "state_accum" result = "identifier">
+			<transition class = "letter" target = "id_trm"/>
+			<transition class = "digit" target = "id_trm"/>
+		</state>
+		<!--Comparison-->
+		<state name = "grtr" type = "state_accum" result = "delim">
+			<transition class = "eq" target = "grtreq"/>
+		</state>
+		<state name = "grtreq" type = "state_accum" result = "delim">
+			<transition class = "digit" target = "id_trm"/>
+		</state>
+		<!--Results-->
+		<state name = "number_literal" type = "state_literal" result = "default"/>
+		<state name = "identifier" type = "state_literal" result = "default"/>
+		<state name = "delim" type = "state_delim" result = "default"/>
+		<!--Errors-->
+		<state name = "default_error" type = "state_id" result = "default"/>
 	</states>
 </scanner>

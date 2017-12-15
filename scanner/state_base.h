@@ -23,6 +23,8 @@ public:
 	void add_transition(transition const& trans);
     void set_name(std::string const& name);
     std::string const& get_name();
+    void set_resulting_state(std::string const& name);
+    std::string const& get_resulting_state();
 
     virtual state_type get_state_type() const = 0;
     virtual bool should_pop_char() const;
@@ -34,6 +36,7 @@ protected:
 
 protected:
     std::string name_;
+    std::string resulting_state_;
 	transition_vector transitions_;
 };
 

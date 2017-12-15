@@ -12,9 +12,13 @@ public:
     std::unique_ptr<out_lexeme_table> get_result();
 
 private:
-    lexeme_type get_type(pending_lexeme const& lex);
+    void retrieve_next_lexeme(std::istream& input_stream);
+    void remove_leading_spaces(std::istream& input_stream);
     void handle_pending_lexeme(pending_lexeme&& lex);
     void handle_pending_err(pending_lexeme const& lex);
+    void switch_line(std::istream& input_stream);
+
+    lexeme_type get_type(pending_lexeme const& lex);
     size_t create_id(pending_lexeme const& lex);
 
 private:

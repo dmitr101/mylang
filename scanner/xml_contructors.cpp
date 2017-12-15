@@ -23,6 +23,7 @@ namespace
     char const* const CLASS_ATTR    = "class";
     char const* const TARGET_ATTR   = "target";
     char const* const REXP_ATTR     = "rexp";
+    char const* const RES_ATTR      = "result";
 
     char const* const DEFAULT_STATE = "default";
 }
@@ -85,6 +86,7 @@ namespace
         auto type = get_attr(node, TYPE_ATTR);
         auto result = state_factory::get_instance().create(type);
         result->set_name(get_attr(node, NAME_ATTR));
+        result->set_resulting_state(get_attr(node, RES_ATTR));
         for_each_child_check_name(node,
             [&result, &classes](auto const& transition_tag)
         {
