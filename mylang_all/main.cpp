@@ -6,7 +6,7 @@
 #include <iostream>
 #include <atlconv.h>
 #pragma optimize("", off)
-static char const* const SCANNER_DEFAULT_CONFIG_FILENAME = "sconfig.xml";
+static char const* const SCANNER_DEFAULT_CONFIG_FILENAME = "conf/sconfig.xml";
 
 void print_arg_count_error()
 {
@@ -66,6 +66,7 @@ void main(int argc, char** argv)
     if (argc != 2)
     {
         print_arg_count_error();
+        return;
     }
     run_translator(*(argv + 1));
     system("pause");
