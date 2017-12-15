@@ -35,12 +35,12 @@
 		<state name = "default" type = "state_default" result = "default_error">
 			<transition class = "digit" target = "number_lit0"/>
 			<transition class = "letter" target = "id_trm"/>
-			<transition class = "greater" target = "grtr/>
+			<transition class = "greater" target = "grtr"/>
 		</state>
 		<!--Numbers-->
 		<state name = "number_lit0" type = "state_accum" result = "number_literal">
 			<transition class = "digit" target = "number_lit0"/>
-			<transition class = "dot" target = "number_lit0"/>
+			<transition class = "dot" target = "number_lit1"/>
 			<transition class = "letter" target = "default_error"/>
 		</state>
 		<state name = "number_lit1" type = "state_accum" result = "number_literal">

@@ -1,4 +1,5 @@
 #include "char_class.h"
+#pragma optimize("", off)
 
 char_class::char_class(std::string const& name, std::regex const& rexp)
     : name_(name), rexp_(rexp) {}

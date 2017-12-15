@@ -1,6 +1,7 @@
 #include "transition.h"
 
 
+#pragma optimize("", off)
 
 transition::transition(char_class const& cl, std::string const& target_state)
     : class_(cl), target_state_(target_state) {}
