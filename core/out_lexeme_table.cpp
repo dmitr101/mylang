@@ -1,4 +1,5 @@
 #include "out_lexeme_table.h"
+#include "lexeme_builder.h"
 
 
 
@@ -19,5 +20,6 @@ void out_lexeme_table::copy_and_push_lexeme(lexeme const& lex)
 
 bool out_lexeme_table::emplace_lexeme(lexeme_builder&& ready_builder)
 {
+    all_.push_back(ready_builder.get());
     return false;
 }
