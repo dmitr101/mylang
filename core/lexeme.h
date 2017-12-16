@@ -6,6 +6,7 @@
 class lexeme
 {
 	friend class lexeme_builder;
+    friend class out_lexeme_table;
 public:
 	CORE_API lexeme_type get_type() const;
     CORE_API size_t get_index() const;
