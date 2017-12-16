@@ -122,8 +122,6 @@ namespace
 
 namespace xml_fsm_constructors
 {
-
-
     std::unique_ptr<scanner_private> create_context(std::string const& config_file_name)
     {
         auto doc = load_doc(config_file_name);

@@ -55,8 +55,9 @@ void run_translator(char const* src_file)
     {
         print_and_free(ex->msg());
     }
-    catch (...)
+    catch (std::exception* ex)
     {
+        std::cout << ex->what() << std::endl;
         print_unknown_error();
     }
 }
