@@ -1,3 +1,6 @@
 [submodule "external/tinyxml2"]
 	path = external/tinyxml2
 	url = https://github.com/leethomason/tinyxml2.git
+[submodule "better-enums"]
+	path = better-enums
+	url = https://github.com/aantron/better-enums.git
