@@ -1,4 +1,5 @@
 #include "lexeme.h"
+#include "lexeme_traits.h"
 
 lexeme_type lexeme::get_type() const
 {
@@ -18,4 +19,9 @@ size_t lexeme::get_id() const
 std::string const & lexeme::get_data() const
 {
     return data_;
+}
+
+bool lexeme::check(lexeme_trait const & trait) const
+{
+	return trait.check(*this);
 }

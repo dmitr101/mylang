@@ -148,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core_common.h" />
+    <ClInclude Include="lexeme_traits.h" />
     <ClInclude Include="out_lexeme_table.h" />
     <ClInclude Include="lexeme.h" />
     <ClInclude Include="lexeme_builder.h" />
@@ -173,6 +174,7 @@
     </ClCompile>
     <ClCompile Include="lexeme.cpp" />
     <ClCompile Include="lexeme_builder.cpp" />
+    <ClCompile Include="lexeme_traits.cpp" />
     <ClCompile Include="out_lexeme_table.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>

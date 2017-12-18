@@ -1,4 +1,5 @@
 #include "recursive_descender.h"
+#include "../core/lexeme_traits.h"
 #include <memory>
 
 recursive_descender::recursive_descender(std::vector<std::shared_ptr<lexeme>> const& lexems)
@@ -20,19 +21,9 @@ void recursive_descender::next()
     current_ = *current_it_;
 }
 
-void recursive_descender::skip_op()
+bool recursive_descender::expect(lexeme_trait const& trait)
 {
-
-}
-
-void recursive_descender::skip(size_t num)
-{
-
-}
-
-bool recursive_descender::expect(std::string const& word)
-{
-    if (!accept(word))
+    if (!accept(trait))
     {
         error("unexpected symbol");
         return false;
@@ -40,9 +31,9 @@ bool recursive_descender::expect(std::string const& word)
     return true;
 }
 
-bool recursive_descender::accept(std::string const& word)
+bool recursive_descender::accept(lexeme_trait const& trait)
 {
-    if (current_->get_data() == word)
+    if (current_->check(trait))
     {
         next();
         return true;
@@ -55,12 +46,160 @@ void recursive_descender::error(std::string const& msg)
     result_->emplace_error(parse_error_info{ current_->get_index(), current_->get_data(), msg });
 }
 
+void recursive_descender::identifier_list()
+{
+	do {
+		expect(identifier());
+	} while (accept(spec_char(',')));
+}
+
+void recursive_descender::factor()
+{
+	if (accept(spec_char('('))) {
+		expression();
+		expect(spec_char(')'));
+	}
+	else if (accept(identifier()) || accept(literal()))
+	{
+		return;
+	}
+	else
+	{
+		error("syntax error");
+		next();
+	}
+}
+
+void recursive_descender::logical_expression()
+{
+	accept(spec_char('~'));
+	logical_term();
+	while (accept(keyword("or"))) {
+		logical_term();
+	}
+}
+
+void recursive_descender::conditional()
+{
+	logical_expression();
+	expect(keyword("then"));
+	operations_list();
+	expect(keyword("endif"));
+}
+
+void recursive_descender::cycle()
+{
+	expect(keyword("while"));
+	expect(spec_char('('));
+	logical_expression();
+	expect(spec_char(')'));
+	operations_list();
+	expect(keyword("enddo"));
+}
+
+void recursive_descender::assignment()
+{
+	if (accept(spec_char('='))) {
+		expression();
+	}
+}
+
+void recursive_descender::declaration()
+{
+	expect(identifier());
+	assignment();
+}
+
+void recursive_descender::operation()
+{
+	if (accept(keyword("read"))) {
+		input_output();
+	} 
+	else if (accept(keyword("write"))) {
+		input_output();
+	}
+	else if(accept(keyword("var"))) {
+		declaration();
+	}
+	else if (accept(identifier())) {
+		assignment();
+	}
+	else if (accept(keyword("do"))) {
+		cycle();
+	}
+	else if (accept(keyword("if"))) {
+		conditional();
+	}
+	else {
+		error("synta error");
+		next();
+	}
+}
+
+void recursive_descender::operations_list()
+{
+	do {
+		operation();
+	} while (accept(spec_char(';')));
+}
+
 void recursive_descender::programm()
 {
-    if (accept("module"))
-    {
-        identifier();
+	if (accept(keyword("module"))) {
+		expect(identifier());
+		expect(spec_char(';'));
+	}
+	else {
+		error("Missing module declaration!");
+	}
+	operations_list();
+}
 
-    }
-    
+void recursive_descender::term()
+{
+	factor();
+	while (accept(spec_char('*')) || accept(spec_char('/'))) {
+		factor();
+	}
+}
+
+void recursive_descender::expression()
+{
+	accept(spec_char('-'));
+	term();
+	while (accept(spec_char('+')) || accept(spec_char('-')))
+	{
+		term();
+	}
+}
+
+inline void recursive_descender::input_output()
+{
+	expect(spec_char('('));
+	identifier_list();
+	expect(spec_char(')'));
+}
+
+void recursive_descender::logical_relation()
+{
+	if (!(accept(spec_char('==')) || accept(spec_char('!=')) || accept(spec_char('>'))
+		|| accept(spec_char('>=')) || accept(spec_char('<')) || accept(spec_char('<='))))
+		error("syntax error");
+}
+
+void recursive_descender::logical_factor()
+{
+	bool brackets = accept(spec_char('('));
+	expression();
+	logical_relation();
+	expression();
+	if (brackets) expect(spec_char(')'));
+}
+
+void recursive_descender::logical_term()
+{
+	logical_factor();
+	while (accept(keyword("and"))) {
+		logical_factor();
+	}
 }

@@ -3,6 +3,7 @@
 #include <string>
 #include "lexeme_type.h"
 
+struct lexeme_trait;
 class lexeme
 {
 	friend class lexeme_builder;
@@ -12,6 +13,8 @@ public:
     CORE_API size_t get_index() const;
     CORE_API size_t get_id() const;
     CORE_API std::string const& get_data() const;
+
+	CORE_API bool check(lexeme_trait const& trait) const;
 
 private:
 	lexeme() {}
