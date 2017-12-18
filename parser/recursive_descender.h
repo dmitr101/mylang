@@ -12,9 +12,10 @@ class recursive_descender
 
 private:
     void next();
-    void expect(std::string const& word);
-    void accept(std::string const& word);
-    void try_skip();
+    void skip_op();
+    bool expect(std::string const& word);
+    bool accept(std::string const& word);
+    void error(std::string const& msg);
 
     void identifier();
     void identifier_list();
