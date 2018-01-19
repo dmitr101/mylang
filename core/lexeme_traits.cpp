@@ -20,12 +20,17 @@ bool literal::check(lexeme const & lex) const
 	return lex.get_type() == lexeme_type::literal;
 }
 
-spec_char::spec_char(char val)
+spec_char::spec_char(std::string const& val)
 	: val_(val)
 {}
+
+spec_char::spec_char(char val)
+{
+    val_.push_back(val);
+}
 
 bool spec_char::check(lexeme const & lex) const
 {
 	return lex.get_type() == lexeme_type::delim
-		&& lex.get_data()[0] == val_;
+		&& lex.get_data() == val_;
 }

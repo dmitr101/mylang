@@ -31,8 +31,9 @@ struct literal : public lexeme_trait
 
 struct spec_char : public lexeme_trait
 {
-	CORE_API explicit spec_char(char val);
+    CORE_API explicit spec_char(std::string const& val);
+    CORE_API explicit spec_char(char val);
 	virtual bool check(lexeme const& lex) const override;
 
-	char val_ = '\0';
+	std::string val_;
 };

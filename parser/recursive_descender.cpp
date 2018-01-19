@@ -53,18 +53,15 @@ void recursive_descender::identifier_list()
 	} while (accept(spec_char(',')));
 }
 
-void recursive_descender::factor()
-{
+void recursive_descender::factor() {
 	if (accept(spec_char('('))) {
 		expression();
 		expect(spec_char(')'));
 	}
-	else if (accept(identifier()) || accept(literal()))
-	{
+	else if (accept(identifier()) || accept(literal())) {
 		return;
 	}
-	else
-	{
+	else {
 		error("syntax error");
 		next();
 	}
@@ -131,7 +128,7 @@ void recursive_descender::operation()
 		conditional();
 	}
 	else {
-		error("synta error");
+		error("syntax error");
 		next();
 	}
 }
@@ -182,8 +179,8 @@ inline void recursive_descender::input_output()
 
 void recursive_descender::logical_relation()
 {
-	if (!(accept(spec_char('==')) || accept(spec_char('!=')) || accept(spec_char('>'))
-		|| accept(spec_char('>=')) || accept(spec_char('<')) || accept(spec_char('<='))))
+	if (!(accept(spec_char("==")) || accept(spec_char("!=")) || accept(spec_char('>'))
+		|| accept(spec_char(">=")) || accept(spec_char('<')) || accept(spec_char("<="))))
 		error("syntax error");
 }
 
