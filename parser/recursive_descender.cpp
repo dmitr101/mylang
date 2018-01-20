@@ -1,6 +1,7 @@
 #include "recursive_descender.h"
 #include "../core/lexeme_traits.h"
 #include <memory>
+#pragma optimize("", off)
 
 recursive_descender::recursive_descender(std::vector<std::shared_ptr<lexeme>> const& lexems)
     : lexems_(lexems)
@@ -33,7 +34,7 @@ bool recursive_descender::expect(lexeme_trait const& trait)
 
 bool recursive_descender::accept(lexeme_trait const& trait)
 {
-    if (current_->check(trait))
+    if (current_->check(trait) && current_it_ != (lexems_.end() - 1))
     {
         next();
         return true;

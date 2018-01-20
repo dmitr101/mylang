@@ -1,6 +1,8 @@
 #include "parser_facade.h"
+#include "recursive_descender.h"
 
-std::unique_ptr<parse_result> parser_facade::parse(out_lexeme_table const& table)
+std::shared_ptr<parse_result> parser_facade::parse(out_lexeme_table const& table)
 {
-    return{ nullptr };
+	recursive_descender rd{ table.get_all() };
+	return rd.parse();
 }

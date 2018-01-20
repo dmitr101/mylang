@@ -10,6 +10,7 @@ class lexeme
     friend class out_lexeme_table;
 public:
 	CORE_API lexeme_type get_type() const;
+	CORE_API std::string get_type_as_string() const;
     CORE_API size_t get_index() const;
     CORE_API size_t get_id() const;
     CORE_API std::string const& get_data() const;

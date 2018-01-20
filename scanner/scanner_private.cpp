@@ -8,6 +8,8 @@
 #include "state_literal.h"
 #include "state_id.h"
 
+#pragma optimize("", off)
+
 namespace
 {
     void register_states()

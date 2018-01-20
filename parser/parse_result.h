@@ -12,6 +12,7 @@ public:
 
     void push_error(parse_error_info const& err);
     void emplace_error(parse_error_info&& err);
+	PARSER_API std::vector<parse_error_info> const& get_errors() const;
 
 private:
     std::vector<parse_error_info> errors_;

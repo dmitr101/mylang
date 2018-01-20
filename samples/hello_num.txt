@@ -1,0 +1,3 @@
+module helloNum;
+var num = 5 + 10;
+write(num);

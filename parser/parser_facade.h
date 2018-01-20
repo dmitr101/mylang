@@ -9,6 +9,6 @@ class parser_facade
 {
 	DECLARE_SINGLETON_DLL(parser_facade, PARSER_API)
 public:
-	PARSER_API std::unique_ptr<parse_result> parse(out_lexeme_table const& table);
+	PARSER_API std::shared_ptr<parse_result> parse(out_lexeme_table const& table);
 };
 

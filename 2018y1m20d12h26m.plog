@@ -1,0 +1,17 @@
+PARSE SUCCESS 
+LEXEM TABLE: 
+0.module : keyword; 
+1.helloNum : id; 
+2.; : delim; 
+3.var : keyword; 
+4.num : id; 
+5.= : delim; 
+6.5 : literal; 
+7.+ : delim; 
+8.10 : literal; 
+9.write : keyword; 
+10.( : delim; 
+11.num : id; 
+12.) : delim; 
+13.; : delim; 
+ERRORS: 

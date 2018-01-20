@@ -2,9 +2,11 @@
 <scanner>
 	<keywords>
 		<keyword name = "module"/>
+		<keyword name = "var"/>
 		<keyword name = "if"/>
 		<keyword name = "else"/>
-		<keyword name = "do"/>
+		<keyword name = "enddo"/>
+		<keyword name = "endif"/>
 		<keyword name = "while"/>
 		<keyword name = "end"/>
 		<keyword name = "read"/>
@@ -84,7 +86,7 @@
 		<state name = "separ" type = "state_accum" result = "delim"/>
 		<!--Results-->
 		<state name = "number_literal" type = "state_literal" result = "default"/>
-		<state name = "identifier" type = "state_literal" result = "default"/>
+		<state name = "identifier" type = "state_id" result = "default"/>
 		<state name = "delim" type = "state_delim" result = "default"/>
 		<!--Errors-->
 		<state name = "default_error" type = "state_id" result = "default"/>

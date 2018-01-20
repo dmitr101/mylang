@@ -1,6 +1,7 @@
 #include "state_base.h"
 #include "state_err.h"
 #include <algorithm>
+#pragma optimize("", off)
 
 void state_base::add_transition(transition const& trans)
 {
