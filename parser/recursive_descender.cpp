@@ -26,7 +26,7 @@ bool recursive_descender::expect(lexeme_trait const& trait)
 {
     if (!accept(trait))
     {
-        error("unexpected symbol");
+        error(std::string("Unexpected symbol. Expected ") + trait.name());
         return false;
     }
     return true;
