@@ -129,7 +129,7 @@ void recursive_descender::operation()
 		conditional();
 	}
 	else {
-		error("syntax error");
+		error("Syntax error.");
 		next();
 	}
 }

@@ -80,7 +80,10 @@ void run_translator(char const* src_file)
 
         auto& parser = parser_facade::get_instance();
         auto result = parser.parse(*lexems);
-        log_parse_result(*result, *lexems);
+		if (!result->all_good())
+		{
+			log_parse_result(*result, *lexems);
+		}
     }
     catch (scanner_exception* ex)
     {

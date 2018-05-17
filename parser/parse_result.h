@@ -7,11 +7,12 @@
 class parse_result
 {
 public:
-	parse_result();
+	PARSER_API parse_result() = default;
 	PARSER_API ~parse_result() = default;
 
     void push_error(parse_error_info const& err);
     void emplace_error(parse_error_info&& err);
+	PARSER_API bool all_good() const;
 	PARSER_API std::vector<parse_error_info> const& get_errors() const;
 
 private:
