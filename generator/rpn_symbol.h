@@ -17,19 +17,25 @@ namespace rpn
 
 	struct operand : symbol
 	{
-		enum class type
+		enum class operand_type
 		{
 			constant,
 			variable,
 		};
 
-		type	operand_type_;
-		size_t  id_;
+		operand() = default;
+		operand(operand_type type, size_t id)
+			: operand_type_(type)
+			, id_(id) {}
+
+		operand_type operand_type_;
+		size_t		 id_;
 	};
 
 	enum class ope_tag
 	{
-		ope_assignment = 0,
+		ope_declaration = 0,
+		ope_assignment,
 		ope_plus,
 		ope_minus,
 		ope_mul,
@@ -58,6 +64,10 @@ namespace rpn
 
 		ope_read,
 		ope_write,
+
+		ope_flush,
+		ope_jmp,
+		ope_jmpc,
 
 		ope_COUNT
 	};
