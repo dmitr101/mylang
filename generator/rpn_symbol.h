@@ -11,8 +11,11 @@ namespace rpn
 			operand,
 			operation
 		};
-		symbol_type sym_type_;
 
+		symbol(symbol_type type)
+			: sym_type_(type) {}
+
+		symbol_type sym_type_;
 	};
 
 	struct operand : symbol
@@ -23,9 +26,11 @@ namespace rpn
 			variable,
 		};
 
-		operand() = default;
+		operand()
+			: symbol(symbol_type::operand) {}
 		operand(operand_type type, size_t id)
-			: operand_type_(type)
+			: symbol(symbol_type::operand)
+			, operand_type_(type)
 			, id_(id) {}
 
 		operand_type operand_type_;
@@ -74,9 +79,11 @@ namespace rpn
 
 	struct operation : symbol
 	{
-		operation() = default;
+		operation()
+			: symbol(symbol_type::operation) {}
 		operation(ope_tag tag, size_t priority)
-			: ope_tag_(tag)
+			: symbol(symbol_type::operation)
+			, ope_tag_(tag)
 			, priority_(priority) {}
 
 		ope_tag ope_tag_;
