@@ -25,6 +25,7 @@ std::vector<std::shared_ptr<rpn::symbol>> generator_facade::create_rpn_stream(ou
 		auto op = rpn::get_operation_map().at(l->get_data());
 		if (op.ope_tag_ == rpn::ope_tag::ope_flush)
 		{
+			//or maybe flush all the ops?
 			continue;
 		}
 		if (op_stack.empty() || op_stack.top()->priority_ < op.priority_)

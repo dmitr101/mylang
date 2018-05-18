@@ -27,6 +27,7 @@ namespace rpn
 	
 			res_map["if"]		= { ope_tag::ope_if,			2 };
 			res_map["then"]		= { ope_tag::ope_then,			3 };
+			res_map["else"]		= { ope_tag::ope_else,			3 };
 			res_map["endif"]	= { ope_tag::ope_endif,			0 };
 	
 			res_map["or"]		= { ope_tag::ope_or,			7 };

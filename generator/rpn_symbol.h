@@ -54,6 +54,7 @@ namespace rpn
 
 		ope_if,
 		ope_then,
+		ope_else,
 		ope_endif,
 
 		ope_and,

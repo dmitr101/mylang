@@ -82,6 +82,9 @@ void recursive_descender::conditional()
 	logical_expression();
 	expect(keyword("then"));
 	operations_list();
+	if (accept(keyword("else"))) {
+		operations_list();
+	}
 	expect(keyword("endif"));
 }
 
@@ -110,6 +113,7 @@ void recursive_descender::declaration()
 
 void recursive_descender::operation()
 {
+	//TODO: MAKE IF WORK
 	if (accept(keyword("read"))) {
 		input_output();
 	} 
