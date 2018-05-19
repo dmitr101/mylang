@@ -23,6 +23,7 @@ public:
 
 private:
 	void push_internal(std::shared_ptr<lexeme> lex);
+	void push_unique_indexed(std::vector<std::shared_ptr<lexeme>>& vec, std::shared_ptr<lexeme> lex);
 
 private:
 	std::vector<std::shared_ptr<lexeme>> all_;

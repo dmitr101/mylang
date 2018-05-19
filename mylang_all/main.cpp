@@ -71,20 +71,17 @@ void print_and_free(BSTR msg)
 
 void run_translator(char const* src_file)
 {
-    try
-    {
-        auto& scanner = scanner_facade::get_instance();
-        scanner.initialize(SCANNER_DEFAULT_CONFIG_FILENAME);
-        auto src = load_src(src_file);
-        auto lexems = scanner.scan(src);
+	try
+	{
+		auto& scanner = scanner_facade::get_instance();
+		scanner.initialize(SCANNER_DEFAULT_CONFIG_FILENAME);
+		auto src = load_src(src_file);
+		auto lexems = scanner.scan(src);
 
-        auto& parser = parser_facade::get_instance();
-        auto result = parser.parse(*lexems);
-		if (!result->all_good())
-		{
-			log_parse_result(*result, *lexems);
-		}
-    }
+		auto& parser = parser_facade::get_instance();
+		auto result = parser.parse(*lexems);
+		log_parse_result(*result, *lexems);
+	}
     catch (scanner_exception* ex)
     {
         print_and_free(ex->msg());

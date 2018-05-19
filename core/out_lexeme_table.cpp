@@ -1,8 +1,7 @@
 #include "out_lexeme_table.h"
 #include "lexeme_builder.h"
 #include "lexeme_traits.h"
-
-
+#include <algorithm>
 
 out_lexeme_table::out_lexeme_table(out_lexeme_table&& other)
     : all_(std::move(other.all_))
@@ -37,18 +36,25 @@ bool out_lexeme_table::emplace_lexeme(lexeme_builder&& ready_builder)
     return true;
 }
 
+void out_lexeme_table::push_unique_indexed(std::vector<std::shared_ptr<lexeme>>& vec, std::shared_ptr<lexeme> lex)
+{
+	if (std::find_if(vec.begin(), vec.end(), [lex](auto l) { return lex->get_data() == l->get_data(); }) == vec.end())
+	{
+		lex->id_ = vec.size();
+		vec.push_back(lex);
+	}
+}
+
 void out_lexeme_table::push_internal(std::shared_ptr<lexeme> lex)
 {
 	all_.push_back(lex);
 	if (lex->check(identifier()))
 	{
-		lex->id_ = ids_.size();
-		ids_.push_back(lex);
+		push_unique_indexed(ids_, lex);
 	}
 	else if (lex->check(literal()))
 	{
-		lex->id_ = consts_.size();
-		consts_.push_back(lex);
+		push_unique_indexed(consts_, lex);
 	}
 }
 
