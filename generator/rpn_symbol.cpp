@@ -22,13 +22,13 @@ namespace rpn
 			res_map[")"]		= { ope_tag::ope_rbracket,		8, false };
 																  
 			res_map["while"]	= { ope_tag::ope_while,			3, false };
-			res_map["do"]		= { ope_tag::ope_do,			4, false };
-			res_map["enddo"]	= { ope_tag::ope_enddo,			4, false };
+			res_map["do"]		= { ope_tag::ope_do,			3, false };
+			res_map["enddo"]	= { ope_tag::ope_enddo,			3, false };
 																 
 			res_map["if"]		= { ope_tag::ope_if,			3, false };
-			res_map["then"]		= { ope_tag::ope_then,			4, false };
-			res_map["else"]		= { ope_tag::ope_else,			4, false };
-			res_map["endif"]	= { ope_tag::ope_endif,			4, false };
+			res_map["then"]		= { ope_tag::ope_then,			3, false };
+			res_map["else"]		= { ope_tag::ope_else,			3, false };
+			res_map["endif"]	= { ope_tag::ope_endif,			3, false };
 																
 			res_map["or"]		= { ope_tag::ope_or,			8, true };
 			res_map["and"]		= { ope_tag::ope_and,			9, true };
@@ -41,8 +41,8 @@ namespace rpn
 			res_map[">="]		= { ope_tag::ope_greater_equals,11, true };
 			res_map["<="]		= { ope_tag::ope_less_equals,	11, true };
 		
-			res_map["read"]		= { ope_tag::ope_read,			3, true };
-			res_map["write"]	= { ope_tag::ope_write,			3, true };
+			res_map["read"]		= { ope_tag::ope_read,			4, true };
+			res_map["write"]	= { ope_tag::ope_write,			4, true };
 
 			res_map[";"]		= { ope_tag::ope_semicolon,			2, false };
 	

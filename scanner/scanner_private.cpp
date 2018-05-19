@@ -89,7 +89,7 @@ void scanner_private::retrieve_next_lexeme(std::istream& input_stream)
 
 void scanner_private::remove_leading_spaces(std::istream& input_stream)
 {
-    while (input_stream.peek() == ' ' || input_stream.peek() == '\t')
+    while (input_stream.peek() == ' ' || input_stream.peek() == '\t' || input_stream.peek() == '\n')
     {
         input_stream.get();
     }

@@ -1,0 +1,36 @@
+PARSE SUCCESS 
+LEXEM TABLE: 
+0.module : keyword; 
+1.helloNum : id; 
+2.; : delim; 
+3. : id; 
+4.var : keyword; 
+5.num : id; 
+6.= : delim; 
+7.5 : literal; 
+8.+ : delim; 
+9.10 : literal; 
+10.; : delim; 
+11.if : keyword; 
+12.num : id; 
+13.> : delim; 
+14.11 : literal; 
+15.then : keyword; 
+16. : id; 
+17.write : keyword; 
+18.( : delim; 
+19.11 : literal; 
+20.) : delim; 
+21.; : delim; 
+22. : id; 
+23.endif : keyword; 
+24.; : delim; 
+25. : id; 
+26.write : keyword; 
+27.( : delim; 
+28.num : id; 
+29.) : delim; 
+30.; : delim; 
+ERRORS: 
+RPN: 
+ [  ]  [ num ]  [ ope_0 ]  [ 5 ]  [ 10 ]  [ ope_2 ]  [ ope_1 ]  [ num ]  [ 11 ]  [ ope_21 ]  [ lbl_0 ]  [ ope_28 ]  [  ]  [ 11 ]  [ ope_25 ]  [  ]  [ lbl_0 ]  [  ]  [ num ]  [ ope_25 ] 

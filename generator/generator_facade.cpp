@@ -49,6 +49,44 @@ std::vector<std::shared_ptr<rpn::symbol>> generator_facade::create_rpn_stream(ou
 			}
 			continue;
 		}
+		if (cur_op.ope_tag_ == rpn::ope_tag::ope_endif)
+		{
+			auto to_end = lbl_stack.top();
+			lbl_stack.pop();
+			res_stream.push_back(to_end);
+			to_end->symbol_idx_ = res_stream.size() - 1;
+			continue;
+		}
+		if (cur_op.ope_tag_ == rpn::ope_tag::ope_else)
+		{
+			auto to_else = lbl_stack.top();
+			lbl_stack.pop();
+			auto to_end = new_label();
+			lbl_stack.push(to_end);
+			res_stream.push_back(to_end);
+			res_stream.push_back(std::make_shared<rpn::operation>(rpn::ope_tag::ope_jmp, 0, true));
+			res_stream.push_back(to_else);
+			to_else->symbol_idx_ = res_stream.size() - 1;
+			continue;
+		}
+		if (cur_op.ope_tag_ == rpn::ope_tag::ope_while)
+		{
+			auto to_loop = new_label();
+			lbl_stack.push(to_loop);
+			res_stream.push_back(to_loop);
+			to_loop->symbol_idx_ = res_stream.size() - 1;
+		}
+		if (cur_op.ope_tag_ == rpn::ope_tag::ope_enddo)
+		{
+			auto to_end = lbl_stack.top();
+			lbl_stack.pop();
+			auto to_loop = lbl_stack.top();
+			lbl_stack.pop();
+			res_stream.push_back(to_loop);
+			res_stream.push_back(std::make_shared<rpn::operation>(rpn::ope_tag::ope_jmp, 0, true));
+			res_stream.push_back(to_end);
+			to_end->symbol_idx_ = res_stream.size() - 1;
+		}
 		if (op_stack.empty() || op_stack.top()->priority_ < cur_op.priority_)
 		{
 			op_stack.push(std::make_shared<rpn::operation>(cur_op));
@@ -71,48 +109,12 @@ std::vector<std::shared_ptr<rpn::symbol>> generator_facade::create_rpn_stream(ou
 				res_stream.push_back(to_else);
 				res_stream.push_back(std::make_shared<rpn::operation>(rpn::ope_tag::ope_jmp_false, 0, true));
 			}
-			else if (cur_op.ope_tag_ == rpn::ope_tag::ope_else)
-			{
-				auto to_else = lbl_stack.top();
-				lbl_stack.pop();
-				auto to_end = new_label();
-				lbl_stack.push(to_end);
-				res_stream.push_back(to_end);
-				res_stream.push_back(std::make_shared<rpn::operation>(rpn::ope_tag::ope_jmp, 0, true));
-				res_stream.push_back(to_else);
-				to_else->symbol_idx_ = res_stream.size() - 1;
-			}
-			else if (cur_op.ope_tag_ == rpn::ope_tag::ope_endif)
-			{
-				auto to_end = lbl_stack.top();
-				lbl_stack.pop();
-				res_stream.push_back(to_end);
-				to_end->symbol_idx_ = res_stream.size() - 1;
-			}
-			else if (cur_op.ope_tag_ == rpn::ope_tag::ope_while)
-			{
-				auto to_loop = new_label();
-				lbl_stack.push(to_loop);
-				res_stream.push_back(to_loop);
-				to_loop->symbol_idx_ = res_stream.size() - 1;
-			}
 			else if (cur_op.ope_tag_ == rpn::ope_tag::ope_do)
 			{
 				auto to_end = new_label();
 				lbl_stack.push(to_end);
 				res_stream.push_back(to_end);
 				res_stream.push_back(std::make_shared<rpn::operation>(rpn::ope_tag::ope_jmp_false, 0, true));
-			}
-			else if (cur_op.ope_tag_ == rpn::ope_tag::ope_enddo)
-			{
-				auto to_end = lbl_stack.top();
-				lbl_stack.pop();
-				auto to_loop = lbl_stack.top();
-				lbl_stack.pop();
-				res_stream.push_back(to_loop);
-				res_stream.push_back(std::make_shared<rpn::operation>(rpn::ope_tag::ope_jmp, 0, true));
-				res_stream.push_back(to_end);
-				to_end->symbol_idx_ = res_stream.size() - 1;
 			}
 			else
 			{

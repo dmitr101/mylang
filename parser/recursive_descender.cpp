@@ -130,10 +130,6 @@ void recursive_descender::operation()
 	else if (accept(keyword("if"))) {
 		conditional();
 	}
-	else {
-		error("Syntax error.");
-		next();
-	}
 }
 
 void recursive_descender::operations_list()
