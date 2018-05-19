@@ -4,13 +4,16 @@
 		<keyword name = "module"/>
 		<keyword name = "var"/>
 		<keyword name = "if"/>
+		<keyword name = "then"/>
 		<keyword name = "else"/>
-		<keyword name = "enddo"/>
 		<keyword name = "endif"/>
 		<keyword name = "while"/>
-		<keyword name = "end"/>
+		<keyword name = "do"/>
+		<keyword name = "enddo"/>
 		<keyword name = "read"/>
 		<keyword name = "write"/>
+		<keyword name = "and"/>
+		<keyword name = "or"/>
 	</keywords>
 	<classes>
 		<!--General characters-->

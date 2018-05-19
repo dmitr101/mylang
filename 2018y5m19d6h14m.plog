@@ -1,0 +1,20 @@
+PARSE SUCCESS 
+LEXEM TABLE: 
+0.module : keyword; 
+1.helloNum : id; 
+2.; : delim; 
+3.var : keyword; 
+4.num : id; 
+5.= : delim; 
+6.5 : literal; 
+7.+ : delim; 
+8.10 : literal; 
+9.; : delim; 
+10.write : keyword; 
+11.( : delim; 
+12.num : id; 
+13.) : delim; 
+14.; : delim; 
+ERRORS: 
+RPN: 
+ [ num ]  [ ope_0 ]  [ 5 ]  [ 10 ]  [ ope_2 ]  [ ope_1 ]  [ helloNum ]  [ ope_7 ]  [ ope_6 ]  [ ope_25 ] 

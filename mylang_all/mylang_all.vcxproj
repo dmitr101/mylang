@@ -147,7 +147,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)$(Platform)\scanner.lib;$(SolutionDir)$(Platform)\core.lib;$(SolutionDir)$(Platform)\parser.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)$(Platform)\scanner.lib;$(SolutionDir)$(Platform)\core.lib;$(SolutionDir)$(Platform)\parser.lib;$(SolutionDir)$(Platform)\generator.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -2,6 +2,7 @@
 #include "../scanner/scanner_exception.h"
 #include "../parser/parser_facade.h"
 #include "../parser/parse_result.h"
+#include "../generator/generator_facade.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -26,7 +27,9 @@ inline std::ifstream load_src(char const* path)
     return src;
 }
 
-void log_parse_result(parse_result const& result, out_lexeme_table const& lexems)
+void log_result(parse_result const& result, 
+					out_lexeme_table const& lexems, 
+					std::vector<std::shared_ptr<rpn::symbol>> const& polis)
 {
 	time_t t = time(0);
 	tm* now = localtime(&t);
@@ -57,6 +60,36 @@ void log_parse_result(parse_result const& result, out_lexeme_table const& lexems
 	{
 		log << "On line: " << err.line_ << " In expr: " << err.word_ << " Info: " << err.info_ << '\n';
 	}
+	log << "RPN: \n";
+	for (auto const& rs : polis)
+	{
+		switch (rs->sym_type_)
+		{
+		case rpn::symbol::symbol_type::operand:
+		{
+			auto rso = std::static_pointer_cast<rpn::operand>(rs);
+			auto data = rso->operand_type_ == rpn::operand::operand_type::variable
+				? lexems.get_ids()[rso->id_]->get_data()
+				: lexems.get_consts()[rso->id_]->get_data();
+			log << " [ " << data << " ] ";
+		}
+		break;
+		case rpn::symbol::symbol_type::operation:
+		{
+			auto rso = std::static_pointer_cast<rpn::operation>(rs);
+			log << " [ " << "ope_" << (int)rso->ope_tag_ << " ] ";
+		}
+		break; 
+		case rpn::symbol::symbol_type::label:
+		{
+			auto rso = std::static_pointer_cast<rpn::label>(rs);
+			log << " [ "<< "lbl_" << (int)rso->id_ << " ] ";
+		}
+		break;
+		}
+	}
+	log << "\n";
+
 	log.flush();
 	log.close();
 }
@@ -80,7 +113,11 @@ void run_translator(char const* src_file)
 
 		auto& parser = parser_facade::get_instance();
 		auto result = parser.parse(*lexems);
-		log_parse_result(*result, *lexems);
+
+		auto& generator = generator_facade::get_instance();
+		auto polis = generator.create_rpn_stream(*lexems);
+
+		log_result(*result, *lexems, polis);
 	}
     catch (scanner_exception* ex)
     {

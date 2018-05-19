@@ -29,7 +29,8 @@ std::vector<std::shared_ptr<rpn::symbol>> generator_facade::create_rpn_stream(ou
 		if (l->check(identifier()) || l->check(literal()))
 		{
 			res_stream.push_back(std::make_shared<rpn::operand>(
-				(l->check(literal()) ? rpn::operand::operand_type::constant
+				(l->check(literal()) 
+					? rpn::operand::operand_type::constant
 					: rpn::operand::operand_type::variable),
 				l->get_id()));
 			continue;
@@ -39,8 +40,12 @@ std::vector<std::shared_ptr<rpn::symbol>> generator_facade::create_rpn_stream(ou
 		{
 			while (!op_stack.empty())
 			{
-				res_stream.push_back(op_stack.top());
+				auto to_push = op_stack.top();
 				op_stack.pop();
+				if (to_push->to_final_)
+				{
+					res_stream.push_back(to_push);
+				}
 			}
 			continue;
 		}
@@ -111,10 +116,7 @@ std::vector<std::shared_ptr<rpn::symbol>> generator_facade::create_rpn_stream(ou
 			}
 			else
 			{
-				if (cur_op.to_final_)
-				{
-					op_stack.push(std::make_shared<rpn::operation>(cur_op));
-				}
+				op_stack.push(std::make_shared<rpn::operation>(cur_op));
 			}
 		}
 	}

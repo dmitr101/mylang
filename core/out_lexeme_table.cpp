@@ -38,10 +38,15 @@ bool out_lexeme_table::emplace_lexeme(lexeme_builder&& ready_builder)
 
 void out_lexeme_table::push_unique_indexed(std::vector<std::shared_ptr<lexeme>>& vec, std::shared_ptr<lexeme> lex)
 {
-	if (std::find_if(vec.begin(), vec.end(), [lex](auto l) { return lex->get_data() == l->get_data(); }) == vec.end())
+	auto it = std::find_if(vec.begin(), vec.end(), [lex](auto l) { return lex->get_data() == l->get_data(); });
+	if (it == vec.end())
 	{
 		lex->id_ = vec.size();
 		vec.push_back(lex);
+	}
+	else
+	{
+		lex->id_ = (*it)->id_;
 	}
 }
 
