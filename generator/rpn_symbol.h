@@ -9,16 +9,17 @@ namespace rpn
 		enum class symbol_type
 		{
 			operand,
-			operation
+			operation,
+			label
 		};
 
 		symbol(symbol_type type)
 			: sym_type_(type) {}
 
-		symbol_type sym_type_;
+		symbol_type const sym_type_;
 	};
 
-	struct operand : symbol
+	struct operand : public symbol
 	{
 		enum class operand_type
 		{
@@ -48,8 +49,8 @@ namespace rpn
 		ope_lbracket,
 		ope_rbracket,
 
-		ope_do,
 		ope_while,
+		ope_do,
 		ope_enddo,
 
 		ope_if,
@@ -71,25 +72,46 @@ namespace rpn
 		ope_read,
 		ope_write,
 
-		ope_flush,
+		ope_semicolon,
 		ope_jmp,
-		ope_jmpc,
+		ope_jmp_false,
 
 		ope_COUNT
 	};
 
-	struct operation : symbol
+	struct operation : public symbol
 	{
 		operation()
 			: symbol(symbol_type::operation) {}
-		operation(ope_tag tag, size_t priority)
+		operation(ope_tag tag, size_t priority, bool to_final)
 			: symbol(symbol_type::operation)
 			, ope_tag_(tag)
-			, priority_(priority) {}
+			, priority_(priority) 
+			, to_final_(to_final) {}
+		operation& operator=(operation const& oth)
+		{
+			ope_tag_ = oth.ope_tag_;
+			priority_ = oth.priority_;
+			to_final_ = oth.to_final_;
+			return *this;
+		}
 
 		ope_tag ope_tag_;
 		size_t	priority_;
+		bool	to_final_;
 	};
 
 	std::unordered_map<std::string, operation> const& get_operation_map();
+
+	struct label : public symbol
+	{
+		label()
+			: symbol(symbol_type::label) {}
+		label(size_t id, size_t symbol_idx)
+			: symbol(symbol_type::label)
+			, id_(id)
+			, symbol_idx_(symbol_idx) {}
+		size_t id_;
+		size_t symbol_idx_;
+	};
 }

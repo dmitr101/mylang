@@ -90,10 +90,8 @@ void recursive_descender::conditional()
 
 void recursive_descender::cycle()
 {
-	expect(keyword("while"));
-	expect(spec_char('('));
 	logical_expression();
-	expect(spec_char(')'));
+	expect(keyword("do"));
 	operations_list();
 	expect(keyword("enddo"));
 }
@@ -126,7 +124,7 @@ void recursive_descender::operation()
 	else if (accept(identifier())) {
 		assignment();
 	}
-	else if (accept(keyword("do"))) {
+	else if (accept(keyword("while"))) {
 		cycle();
 	}
 	else if (accept(keyword("if"))) {

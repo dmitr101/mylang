@@ -11,40 +11,40 @@ namespace rpn
 		{
 			res_map.reserve((size_t)ope_tag::ope_COUNT);
 
-			res_map["var"]		= { ope_tag::ope_declaration,	6 };
-			res_map["="]		= { ope_tag::ope_assignment,	6 };
+			res_map["var"]		= { ope_tag::ope_declaration,	7, true };
+			res_map["="]		= { ope_tag::ope_assignment,	7, true };
 
-			res_map["+"]		= { ope_tag::ope_plus,			11 };
-			res_map["-"]		= { ope_tag::ope_minus,			11 };
-			res_map["*"]		= { ope_tag::ope_mul,			12 };
-			res_map["/"]		= { ope_tag::ope_div,			12 };
-			res_map["("]		= { ope_tag::ope_lbracket,		6 };
-			res_map[")"]		= { ope_tag::ope_rbracket,		7 };
+			res_map["+"]		= { ope_tag::ope_plus,			12, true };
+			res_map["-"]		= { ope_tag::ope_minus,			12, true };
+			res_map["*"]		= { ope_tag::ope_mul,			13, true };
+			res_map["/"]		= { ope_tag::ope_div,			13, true };
+			res_map["("]		= { ope_tag::ope_lbracket,		7, false };
+			res_map[")"]		= { ope_tag::ope_rbracket,		8, false };
+																  
+			res_map["while"]	= { ope_tag::ope_while,			3, false };
+			res_map["do"]		= { ope_tag::ope_do,			4, false };
+			res_map["enddo"]	= { ope_tag::ope_enddo,			4, false };
+																 
+			res_map["if"]		= { ope_tag::ope_if,			3, false };
+			res_map["then"]		= { ope_tag::ope_then,			4, false };
+			res_map["else"]		= { ope_tag::ope_else,			4, false };
+			res_map["endif"]	= { ope_tag::ope_endif,			4, false };
+																
+			res_map["or"]		= { ope_tag::ope_or,			8, true };
+			res_map["and"]		= { ope_tag::ope_and,			9, true };
+			res_map["~"]		= { ope_tag::ope_not,			10, true };
 	
-			res_map["do"]		= { ope_tag::ope_do,			0 };
-			res_map["while"]	= { ope_tag::ope_while,			0 };
-			res_map["enddo"]	= { ope_tag::ope_enddo,			0 };
-	
-			res_map["if"]		= { ope_tag::ope_if,			2 };
-			res_map["then"]		= { ope_tag::ope_then,			3 };
-			res_map["else"]		= { ope_tag::ope_else,			3 };
-			res_map["endif"]	= { ope_tag::ope_endif,			0 };
-	
-			res_map["or"]		= { ope_tag::ope_or,			7 };
-			res_map["and"]		= { ope_tag::ope_and,			8 };
-			res_map["~"]		= { ope_tag::ope_not,			9 };
-	
-			res_map["=="]		= { ope_tag::ope_equals,		10 };
-			res_map["!="]		= { ope_tag::ope_not_equals,	10 };
-			res_map["<"]		= { ope_tag::ope_less,			10 };
-			res_map[">"]		= { ope_tag::ope_greater,		10 };
-			res_map[">="]		= { ope_tag::ope_greater_equals,10 };
-			res_map["<="]		= { ope_tag::ope_less_equals,	10 };
+			res_map["=="]		= { ope_tag::ope_equals,		11, true };
+			res_map["!="]		= { ope_tag::ope_not_equals,	11, true };
+			res_map["<"]		= { ope_tag::ope_less,			11, true };
+			res_map[">"]		= { ope_tag::ope_greater,		11, true };
+			res_map[">="]		= { ope_tag::ope_greater_equals,11, true };
+			res_map["<="]		= { ope_tag::ope_less_equals,	11, true };
 		
-			res_map["read"]		= { ope_tag::ope_read,			0 };
-			res_map["write"]	= { ope_tag::ope_write,			0 };
+			res_map["read"]		= { ope_tag::ope_read,			3, true };
+			res_map["write"]	= { ope_tag::ope_write,			3, true };
 
-			res_map[";"]		= { ope_tag::ope_flush,			0 };
+			res_map[";"]		= { ope_tag::ope_semicolon,			2, false };
 	
 			map_inited = true;
 		}
