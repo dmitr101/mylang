@@ -26,6 +26,6 @@ private:
 
     std::set<std::string> keywords_;
     stream_fsm fsm_;
-    size_t current_line_;
+	size_t current_line_;
 };
 
