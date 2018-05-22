@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<scanner>
+	<keywords>
+		<keyword name = "module"/>
+		<keyword name = "var"/>
+		<keyword name = "if"/>
+		<keyword name = "then"/>
+		<keyword name = "else"/>
+		<keyword name = "endif"/>
+		<keyword name = "while"/>
+		<keyword name = "do"/>
+		<keyword name = "enddo"/>
+		<keyword name = "read"/>
+		<keyword name = "write"/>
+		<keyword name = "and"/>
+		<keyword name = "or"/>
+	</keywords>
+	<classes>
+		<!--General characters-->
+		<class name = "digit" rexp = "\d"/>
+		<class name = "letter" rexp = "[A-Z]|[a-z]"/>
+		<class name = "eq" rexp = "[=]"/>
+		<!--Arythmetic characters-->
+		<class name = "ar"  rexp = "[+\-*\/()]"/>
+		<!--Comparison characters-->
+		<class name = "less" rexp = "[<]"/>
+		<class name = "greater" rexp = "[>]"/>
+		<class name = "not" rexp = "[!]"/>
+		<class name = "cmp" rexp = "[<>!=]"/>
+		<!--Delim characters-->
+		<class name = "dot" rexp = "[.]"/>
+		<class name = "sep" rexp = "[,:;]"/>
+	</classes>
+	<states>
+		<!--First and default state-->
+		<state name = "default" type = "state_default" result = "default_error">
+			<transition class = "digit" target = "number_lit0"/>
+			<transition class = "letter" target = "id_trm"/>
+			<transition class = "greater" target = "grtr"/>
+			<transition class = "less" target = "lss"/>
+			<transition class = "eq" target = "eql"/>
+			<transition class = "not" target = "nt"/>
+			<transition class = "ar" target = "arythm"/>
+			<transition class = "sep" target = "separ"/>
+		</state>
+		<!--Numbers-->
+		<state name = "number_lit0" type = "state_accum" result = "number_literal">
+			<transition class = "digit" target = "number_lit0"/>
+			<transition class = "dot" target = "number_lit1"/>
+			<transition class = "letter" target = "default_error"/>
+		</state>
+		<state name = "number_lit1" type = "state_accum" result = "number_literal">
+			<transition class = "digit" target = "number_lit1"/>
+			<transition class = "dot" target = "default_error"/>
+			<transition class = "letter" target = "default_error"/>
+		</state>
+		<!--IDs/Terms-->
+		<state name = "id_trm" type = "state_accum" result = "identifier">
+			<transition class = "letter" target = "id_trm"/>
+			<transition class = "digit" target = "id_trm"/>
+		</state>
+		<!--Comparison-->
+		<state name = "grtr" type = "state_accum" result = "delim">
+			<transition class = "eq" target = "grtreq"/>
+		</state>
+		<state name = "grtreq" type = "state_accum" result = "delim">
+			<transition class = "cmp" target = "default_error"/>
+		</state>
+		<state name = "lss" type = "state_accum" result = "delim">
+			<transition class = "eq" target = "lsseq"/>
+		</state>
+		<state name = "lsseq" type = "state_accum" result = "delim">
+			<transition class = "cmp" target = "default_error"/>
+		</state>
+		<state name = "assn" type = "state_accum" result = "delim">
+			<transition class = "eq" target = "eql"/>
+		</state>
+		<state name = "eql" type = "state_accum" result = "delim">
+			<transition class = "cmp" target = "default_error"/>
+		</state>
+		<state name = "nt" type = "state_accum" result = "delim">
+			<transition class = "eq" target = "neql"/>
+		</state>
+		<state name = "neql" type = "state_accum" result = "delim">
+			<transition class = "cmp" target = "default_error"/>
+		</state>
+		<!--Misc-->
+		<state name = "arythm" type = "state_accum" result = "delim"/>
+		<state name = "separ" type = "state_accum" result = "delim"/>
+		<!--Results-->
+		<state name = "number_literal" type = "state_literal" result = "default"/>
+		<state name = "identifier" type = "state_id" result = "default"/>
+		<state name = "delim" type = "state_delim" result = "default"/>
+		<!--Errors-->
+		<state name = "default_error" type = "state_id" result = "default"/>
+	</states>
+</scanner>

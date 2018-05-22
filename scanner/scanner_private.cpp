@@ -59,7 +59,6 @@ void scanner_private::handle_pending_lexeme(pending_lexeme&& lex)
 
 void scanner_private::handle_pending_err(pending_lexeme const& lex)
 {
-
 }
 
 void scanner_private::switch_line(std::istream& input_stream)

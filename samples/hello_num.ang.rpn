@@ -1,0 +1,1 @@
+ [ num ]  [ var ]  [ res ]  [ var ]  [ 1 ]  [ = ]  [ num ]  [ read ]  [ lbl_0 ]  [ num ]  [ 1 ]  [ > ]  [ lbl_1 ]  [ jmp_false ]  [ res ]  [ res ]  [ num ]  [ * ]  [ = ]  [ num ]  [ num ]  [ 1 ]  [ - ]  [ = ]  [ lbl_0 ]  [ jmp ]  [ lbl_1 ]  [ res ]  [ write ] 
