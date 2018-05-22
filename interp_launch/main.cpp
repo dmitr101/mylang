@@ -103,8 +103,9 @@ void print_and_free(BSTR msg)
 	::SysFreeString(msg);
 }
 
-void run_translator(char const* src_file)
+int run_translator(char const* src_file)
 {
+	int res_code = 0;
 	try
 	{
 		auto& scanner = scanner_facade::get_instance();
@@ -124,22 +125,24 @@ void run_translator(char const* src_file)
 	}
 	catch (scanner_exception* ex)
 	{
+		res_code = -1;
 		print_and_free(ex->msg());
 	}
 	catch (std::exception* ex)
 	{
+		res_code = -1;
 		std::cout << ex->what() << std::endl;
 		print_unknown_error();
 	}
+	return res_code;
 }
 
-void main(int argc, char** argv)
+int main(int argc, char** argv)
 {
 	if (argc != 2)
 	{
 		print_arg_count_error();
-		return;
+		return -1;
 	}
-	run_translator(*(argv + 1));
-	system("pause");
+	return run_translator(*(argv + 1));
 }
