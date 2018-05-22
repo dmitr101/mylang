@@ -1,0 +1,43 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "anglsl_generate_all",
+            "type": "shell",
+            "command": "D:\\KPI\\3\\1\\translators\\mylang_all\\x64\\interp_launch.exe",
+            "args": [
+                "-src",
+                "${file}",
+                "-rpn",
+                "-rgen",
+                "-ltable"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "anglsl_run",
+            "type": "shell",
+            "command": "D:\\KPI\\3\\1\\translators\\mylang_all\\x64\\interp_launch.exe",
+            "args": [
+                "-src",
+                "${file}",
+                "-run"
+            ],
+            "problemMatcher": []
+        },
+        {
+        "label": "anglsl_generate_run",
+            "type": "shell",
+            "command": "D:\\KPI\\3\\1\\translators\\mylang_all\\x64\\interp_launch.exe",
+            "args": [
+                "-src",
+                "${file}",
+                "-rpn",
+                "-rgen",
+                "-ltable",
+                "-run"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}

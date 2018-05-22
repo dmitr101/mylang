@@ -12,7 +12,15 @@
 #include "argh.h"
 
 static char const* const SCANNER_DEFAULT_CONFIG_FILENAME = "sconfig.xml";
-#pragma optimize(off, "")
+
+std::string own_path() 
+{
+	char buffer[MAX_PATH];
+	GetModuleFileName(NULL, buffer, MAX_PATH);
+	auto pos = std::string(buffer).find_last_of("\\/");
+	return std::string(buffer).substr(0, pos);
+}
+
 void print_unknown_error()
 {
 	std::cout << "Something went wrong, but I don't know what. Sorry." << std::endl;
@@ -25,73 +33,6 @@ inline std::ifstream load_src(char const* path)
 	return src;
 }
 
-void log_result(parse_result const& result,
-	out_lexeme_table const& lexems,
-	std::vector<std::shared_ptr<rpn::symbol>> const& polis)
-{
-	time_t t = time(0);
-	tm* now = localtime(&t);
-	std::stringstream str;
-	str << "D:/KPI/3/1/translators/mylang_all/"
-		<< now->tm_year + 1900 << "y" << now->tm_mon + 1
-		<< "m" << now->tm_mday << "d" << now->tm_hour
-		<< "h" << now->tm_min << "m.plog";
-	auto fname = str.str().c_str();
-	std::ofstream log;
-	log.open(str.str().c_str(), std::ios::out);
-	auto const& errs = result.get_errors();
-	if (errs.empty())
-	{
-		log << "PARSE SUCCESS \n";
-	}
-	else
-	{
-		log << "PARSE FAILED \n";
-	}
-	log << "LEXEM TABLE: \n";
-	for (auto const& l : lexems.get_all())
-	{
-		log << l->get_index() << "." << l->get_data() << " : " << l->get_type_as_string() << "; \n";
-	}
-	log << "ERRORS: \n";
-	for (auto const& err : errs)
-	{
-		log << "On line: " << err.line_ << " In expr: " << err.word_ << " Info: " << err.info_ << '\n';
-	}
-	log << "RPN: \n";
-	for (auto const& rs : polis)
-	{
-		switch (rs->sym_type_)
-		{
-		case rpn::symbol::symbol_type::operand:
-		{
-			auto rso = std::static_pointer_cast<rpn::operand>(rs);
-			auto data = rso->operand_type_ == rpn::operand::operand_type::variable
-				? lexems.get_ids()[rso->id_]->get_data()
-				: lexems.get_consts()[rso->id_]->get_data();
-			log << " [ " << data << " ] ";
-		}
-		break;
-		case rpn::symbol::symbol_type::operation:
-		{
-			auto rso = std::static_pointer_cast<rpn::operation>(rs);
-			log << " [ " << rso->dbg_sym_ << " ] ";
-		}
-		break;
-		case rpn::symbol::symbol_type::label:
-		{
-			auto rso = std::static_pointer_cast<rpn::label>(rs);
-			log << " [ " << "lbl_" << (int)rso->id_ << " ] ";
-		}
-		break;
-		}
-	}
-	log << "\n";
-
-	log.flush();
-	log.close();
-}
-
 void print_help()
 {
 	std::cout <<
@@ -102,6 +43,7 @@ Usage: angsli <-help> <-src=YOUR_SOURCE_FILE_PATH> <-ltable> <-rpn> <-rgen>
 -ltable : generate file YOUR_SOURCE_FILE_PATH.ltable with tables of lexems and ids
 -rpn : generate file YOUR_SOURCE_FILE_PATH.rpn with rpn representation of the code
 -rgen : generate file YOUR_SOURCE_FILE_PATH.rgen with step by step showed rpn generation process
+-run : run the script
 )" 
 	<< std::endl;
 }
@@ -210,8 +152,7 @@ void main(int argc, char** argv)
 {
 	argh::parser cmdl;
 	cmdl.add_param("src");
-	cmdl.parse(argc, argv);
-
+	cmdl.parse(argc, argv, argh::parser::NO_SPLIT_ON_EQUALSIGN | argh::parser::PREFER_PARAM_FOR_UNREG_OPTION);
 	if (cmdl.size() == 0 || cmdl[{"-help"}])
 	{
 		print_help();
@@ -222,12 +163,13 @@ void main(int argc, char** argv)
 	auto src = load_src(src_path.c_str());
 	if (!src.good())
 	{
+		std::cout << "SOURCE: " << src_path << '\n';
 		print_no_file();
 		return;
 	}
 
 	auto& scanner = scanner_facade::get_instance();
-	scanner.initialize(SCANNER_DEFAULT_CONFIG_FILENAME);
+	scanner.initialize(own_path() + "\\" + SCANNER_DEFAULT_CONFIG_FILENAME);
 	auto lexems = scanner.scan(src);
 	if (cmdl[{"-ltable"}])
 	{
@@ -254,7 +196,10 @@ void main(int argc, char** argv)
 		print_rgen_file(src_path, generator.get_steps());
 	}
 
-	runner r{};
-	auto tbl_ptr = lexems.release();
-	r.run(std::move(polis), std::move(*tbl_ptr));
+	if (cmdl[{"-run"}])
+	{
+		runner r{};
+		auto tbl_ptr = lexems.release();
+		r.run(std::move(polis), std::move(*tbl_ptr));
+	}
 }
