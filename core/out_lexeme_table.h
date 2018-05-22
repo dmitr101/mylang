@@ -11,6 +11,8 @@ public:
     out_lexeme_table() = default;
     out_lexeme_table(out_lexeme_table const& other);
     out_lexeme_table(out_lexeme_table&& other);
+	CORE_API out_lexeme_table& operator=(out_lexeme_table const& other);
+	CORE_API out_lexeme_table& operator=(out_lexeme_table&& other);
 
     CORE_API size_t get_next_index() const;
     CORE_API void push_lexeme(std::shared_ptr<lexeme> lex);

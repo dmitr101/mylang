@@ -14,7 +14,8 @@ namespace
 	}
 }
 
-std::vector<std::shared_ptr<rpn::symbol>> generator_facade::create_rpn_stream(out_lexeme_table const& lexems)
+//#pragma optimize(off, "")
+rpn::pstream generator_facade::create_rpn_stream(out_lexeme_table const& lexems)
 {
 	auto const& table = lexems.get_all();
 	std::vector<std::shared_ptr<rpn::symbol>> res_stream;
@@ -22,20 +23,22 @@ std::vector<std::shared_ptr<rpn::symbol>> generator_facade::create_rpn_stream(ou
 
 	std::stack<std::shared_ptr<rpn::operation>> op_stack;
 	std::stack<std::shared_ptr<rpn::label>> lbl_stack;
-	size_t cur_comma_count = -1;
 	for (auto lit = table.cbegin() + 3; lit != table.cend(); ++lit)
 	{
 		auto const& l = *lit;
 		if (l->check(identifier()) || l->check(literal()))
 		{
-			res_stream.push_back(std::make_shared<rpn::operand>(
-				(l->check(literal()) 
+			auto data_sym = std::make_shared<rpn::operand>(
+				(l->check(literal())
 					? rpn::operand::operand_type::constant
 					: rpn::operand::operand_type::variable),
-				l->get_id()));
+				l->get_id());
+			data_sym->dbg_sym_ = l->get_data();
+			res_stream.push_back(data_sym);
 			continue;
 		}
 		auto cur_op = rpn::get_operation_map().at(l->get_data());
+		cur_op.dbg_sym_ = l->get_data();
 		if (cur_op.ope_tag_ == rpn::ope_tag::ope_semicolon)
 		{
 			while (!op_stack.empty())
@@ -47,6 +50,11 @@ std::vector<std::shared_ptr<rpn::symbol>> generator_facade::create_rpn_stream(ou
 					res_stream.push_back(to_push);
 				}
 			}
+			continue;
+		}
+		if (cur_op.ope_tag_ == rpn::ope_tag::ope_lbracket)
+		{
+			op_stack.push(std::make_shared<rpn::operation>(cur_op));
 			continue;
 		}
 		if (cur_op.ope_tag_ == rpn::ope_tag::ope_endif)
@@ -65,6 +73,7 @@ std::vector<std::shared_ptr<rpn::symbol>> generator_facade::create_rpn_stream(ou
 			lbl_stack.push(to_end);
 			res_stream.push_back(to_end);
 			res_stream.push_back(std::make_shared<rpn::operation>(rpn::ope_tag::ope_jmp, 0, true));
+			res_stream.back()->dbg_sym_ = "jmp";
 			res_stream.push_back(to_else);
 			to_else->symbol_idx_ = res_stream.size() - 1;
 			continue;
@@ -84,6 +93,7 @@ std::vector<std::shared_ptr<rpn::symbol>> generator_facade::create_rpn_stream(ou
 			lbl_stack.pop();
 			res_stream.push_back(to_loop);
 			res_stream.push_back(std::make_shared<rpn::operation>(rpn::ope_tag::ope_jmp, 0, true));
+			res_stream.back()->dbg_sym_ = "jmp";
 			res_stream.push_back(to_end);
 			to_end->symbol_idx_ = res_stream.size() - 1;
 		}
@@ -108,6 +118,7 @@ std::vector<std::shared_ptr<rpn::symbol>> generator_facade::create_rpn_stream(ou
 				lbl_stack.push(to_else);
 				res_stream.push_back(to_else);
 				res_stream.push_back(std::make_shared<rpn::operation>(rpn::ope_tag::ope_jmp_false, 0, true));
+				res_stream.back()->dbg_sym_ = "jmp_false";
 			}
 			else if (cur_op.ope_tag_ == rpn::ope_tag::ope_do)
 			{
@@ -115,6 +126,7 @@ std::vector<std::shared_ptr<rpn::symbol>> generator_facade::create_rpn_stream(ou
 				lbl_stack.push(to_end);
 				res_stream.push_back(to_end);
 				res_stream.push_back(std::make_shared<rpn::operation>(rpn::ope_tag::ope_jmp_false, 0, true));
+				res_stream.back()->dbg_sym_ = "jmp_false";
 			}
 			else
 			{

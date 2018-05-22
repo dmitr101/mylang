@@ -15,6 +15,22 @@ out_lexeme_table::out_lexeme_table(out_lexeme_table const& other)
 	, consts_(other.consts_)
 {}
 
+out_lexeme_table& out_lexeme_table::operator=(out_lexeme_table const& other)
+{
+	all_ = other.all_;
+	ids_ = other.ids_;
+	consts_ = other.consts_;
+	return *this;
+}
+
+out_lexeme_table& out_lexeme_table::operator=(out_lexeme_table&& other)
+{
+	all_ = std::move(other.all_);
+	ids_ = std::move(other.ids_);
+	consts_ = std::move(other.consts_);
+	return *this;
+}
+
 size_t out_lexeme_table::get_next_index() const
 {
     return all_.size();

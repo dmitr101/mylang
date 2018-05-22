@@ -17,6 +17,7 @@ namespace rpn
 			: sym_type_(type) {}
 
 		symbol_type const sym_type_;
+		std::string dbg_sym_;
 	};
 
 	struct operand : public symbol

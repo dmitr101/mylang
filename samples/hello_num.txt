@@ -1,12 +1,4 @@
 module helloNum;
 
-var num = 5 + 10;
-if num > 11 then 
-	write(num); 
-endif;
-
-while num > 5 do
-	num = num - 1;
-enddo;
-
+var num = 2 * (10 - 5);
 write(num);
