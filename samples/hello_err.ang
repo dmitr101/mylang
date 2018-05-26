@@ -1,0 +1,3 @@
+module helloErr;
+
+read(10);

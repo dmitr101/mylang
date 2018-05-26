@@ -57,17 +57,58 @@ There is no such source file.
 << std::endl;
 }
 
+void print_with_spaces(std::ofstream& log, std::string const& str, size_t overall_size)
+{
+	for (size_t i = 0; i < overall_size; ++i)
+	{
+		log << ((i < str.size()) ? str[i] : ' ');
+	}
+	log << '|';
+}
+
 void print_ltable_file(std::string const& src_path, out_lexeme_table const& lexems)
 {
 	std::ofstream log;
 	log.open((src_path + ".ltable"), std::ios::out | std::ios::trunc);
+	std::size_t col_size = 10;
+
+	log << "ALL :\n";
+	print_with_spaces(log, "Text", col_size);
+	print_with_spaces(log, "Index", col_size);
+	print_with_spaces(log, "Line", col_size);
+	log << '\n';
 	for (auto const& l : lexems.get_all())
 	{
-		log << l->get_index() << "." << l->get_data() << " : " << l->get_type_as_string() << "; \n";
+		print_with_spaces(log, l->get_data(), col_size);
+		print_with_spaces(log, std::to_string(l->get_index()), col_size);
+		print_with_spaces(log, std::to_string(l->get_line()), col_size);
+		log << '\n';
+	}
+
+	log << "IDS :\n";
+	print_with_spaces(log, "Name", col_size);
+	print_with_spaces(log, "Index", col_size);
+	log << '\n';
+	for (auto const& l : lexems.get_ids())
+	{
+		print_with_spaces(log, l->get_data(), col_size);
+		print_with_spaces(log, std::to_string(l->get_id()), col_size);
+		log << '\n';
+	}
+
+	log << "CONSTS :\n";
+	print_with_spaces(log, "Val", col_size);
+	print_with_spaces(log, "Index", col_size);
+	log << '\n';
+	for (auto const& l : lexems.get_consts())
+	{
+		print_with_spaces(log, l->get_data(), col_size);
+		print_with_spaces(log, std::to_string(l->get_id()), col_size);
+		log << '\n';
 	}
 }
 
-void print_parse_err( parse_result const& result)
+void print_parse_err(parse_result const& result)
 {
 	std::cout << "Parsing errors occurred! \n";
 	for (auto const& err : result.get_errors())
@@ -100,15 +141,6 @@ void print_rpn_file(std::string const& src_path, rpn::pstream const& polis)
 		}
 	}
 	log << "\n";
-}
-
-void print_with_spaces(std::ofstream& log, std::string const& str, size_t overall_size)
-{
-	for (size_t i = 0; i < overall_size; ++i)
-	{
-		log << ((i < str.size()) ? str[i] : ' ');
-	}
-	log << '|';
 }
 
 void print_rgen_file(std::string const& src_path, std::vector<generation_step> const& steps)
@@ -181,6 +213,7 @@ void main(int argc, char** argv)
 	if (!result->all_good())
 	{
 		print_parse_err(*result);
+		return;
 	}
 
 	auto& generator = generator_facade::get_instance();

@@ -17,6 +17,12 @@ lexeme_builder& lexeme_builder::set_id(size_t id)
     return *this;
 }
 
+CORE_API lexeme_builder & lexeme_builder::set_line(size_t line)
+{
+	result_->line_ = line;
+	return *this;
+}
+
 lexeme_builder& lexeme_builder::set_type(lexeme_type type)
 {
     result_->type_ = type;

@@ -44,7 +44,7 @@ namespace rpn
 			res_map["read"]		= { ope_tag::ope_read,			4, true };
 			res_map["write"]	= { ope_tag::ope_write,			4, true };
 
-			res_map[";"]		= { ope_tag::ope_semicolon,			2, false };
+			res_map[";"]		= { ope_tag::ope_semicolon,		2, false };
 	
 			map_inited = true;
 		}

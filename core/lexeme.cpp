@@ -40,6 +40,11 @@ size_t lexeme::get_id() const
     return id_ ;
 }
 
+size_t lexeme::get_line() const
+{
+	return line_;
+}
+
 std::string const & lexeme::get_data() const
 {
     return data_;

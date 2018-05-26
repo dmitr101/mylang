@@ -1,0 +1,6 @@
+module helloInc;
+
+var min;
+read(min);
+var max;
+read(max);

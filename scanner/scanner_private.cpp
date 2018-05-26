@@ -21,7 +21,6 @@ namespace
         factory.register_state<state_delim>();
         factory.register_state<state_literal>();
         factory.register_state<state_id>();
-
     }
 }
 
@@ -49,9 +48,10 @@ std::unique_ptr<out_lexeme_table> scanner_private::get_result()
 
 void scanner_private::handle_pending_lexeme(pending_lexeme&& lex)
 {
-    auto builder = lexeme_builder()
-        .set_index(result_->get_next_index())
-        .set_id(create_id(lex))
+	auto builder = lexeme_builder()
+		.set_index(result_->get_next_index())
+		.set_id(create_id(lex))
+		.set_line(current_line_ + 1)
         .set_type(get_type(lex))
         .set_data(std::move(lex.retrieve_data()));
     result_->emplace_lexeme(std::move(builder));
@@ -90,6 +90,10 @@ void scanner_private::remove_leading_spaces(std::istream& input_stream)
 {
     while (input_stream.peek() == ' ' || input_stream.peek() == '\t' || input_stream.peek() == '\n')
     {
+		if (input_stream.peek() == '\n')
+		{
+			current_line_++;
+		}
         input_stream.get();
     }
 }

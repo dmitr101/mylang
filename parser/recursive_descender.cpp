@@ -1,7 +1,6 @@
 #include "recursive_descender.h"
 #include "../core/lexeme_traits.h"
 #include <memory>
-#pragma optimize("", off)
 
 recursive_descender::recursive_descender(std::vector<std::shared_ptr<lexeme>> const& lexems)
     : lexems_(lexems)
@@ -44,7 +43,7 @@ bool recursive_descender::accept(lexeme_trait const& trait)
 
 void recursive_descender::error(std::string const& msg)
 {
-    result_->emplace_error(parse_error_info{ current_->get_index(), current_->get_data(), msg });
+    result_->emplace_error(parse_error_info{ current_->get_line(), current_->get_data(), msg });
 }
 
 void recursive_descender::identifier_list()
@@ -111,7 +110,6 @@ void recursive_descender::declaration()
 
 void recursive_descender::operation()
 {
-	//TODO: MAKE IF WORK
 	if (accept(keyword("read"))) {
 		input_output();
 	} 
